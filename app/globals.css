@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-background: hsl(0, 0%, 0%);
+  --color-foreground: hsl(0, 0%, 12%);
+  --color-primary: hsl(0, 0%, 95%);
+  --color-primary-foreground: hsl(0, 0%, 12%);
+  --color-accent-warm: #ec3237;
+}
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 12%;
+  --primary: 0 0% 95%;
+  --primary-foreground: 0 0% 12%;
+  --accent-warm: 358 83% 56%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  font-family: var(--font-sans), sans-serif;
+}
