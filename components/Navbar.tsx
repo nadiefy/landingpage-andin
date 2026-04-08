@@ -19,8 +19,8 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Fleet', href: '#fleet' },
     { name: 'Services', href: '#services' },
+    { name: 'Fleet', href: '#fleet' },
     { name: 'About Us', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ];
