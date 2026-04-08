@@ -5,7 +5,7 @@ import { Services } from '@/components/Services';
 import { About } from '@/components/About';
 import { Audience } from '@/components/Audience';
 import { CTA } from '@/components/CTA';
-import { Footer } from '@/components/ui/footer-section';
+import { Footer } from '@/components/Footer';
 
 export default function Page() {
   return (
