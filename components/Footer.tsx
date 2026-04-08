@@ -1,57 +1,120 @@
 'use client';
+import React from 'react';
+import type { ComponentProps, ReactNode } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
+import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
+import Image from 'next/image';
 
-import Link from 'next/link';
-import { motion } from 'motion/react';
+interface FooterLink {
+  title: string;
+  href: string;
+  icon?: React.ComponentType<{ className?: string }>;
+}
+
+interface FooterSection {
+  label: string;
+  links: FooterLink[];
+}
+
+const footerLinks: FooterSection[] = [
+  {
+    label: 'Company',
+    links: [
+      { title: 'Our Fleet', href: '#fleet' },
+      { title: 'Services', href: '#services' },
+      { title: 'About Us', href: '#about' },
+      { title: 'Contact', href: '#contact' },
+    ],
+  },
+  {
+    label: 'Legal',
+    links: [
+      { title: 'Terms & Conditions', href: '/terms' },
+      { title: 'Privacy Policy', href: '/privacy' },
+      { title: 'Cookie Policy', href: '/cookies' },
+    ],
+  },
+  {
+    label: 'Social Links',
+    links: [
+      { title: 'Facebook', href: '#', icon: Facebook },
+      { title: 'Instagram', href: '#', icon: Instagram },
+      { title: 'Youtube', href: '#', icon: Youtube },
+      { title: 'LinkedIn', href: '#', icon: Linkedin },
+    ],
+  },
+];
 
 export function Footer() {
   return (
-    <footer className="w-full bg-black border-t border-primary/10 pt-16 pb-8 px-7 md:px-12 lg:px-20">
-      <motion.div 
-        className="max-w-7xl mx-auto"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-baseline gap-1 mb-6">
-              <span className="text-2xl font-display font-medium tracking-tight text-primary">
-                Electric
-              </span>
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-warm"></span>
-            </Link>
-            <p className="text-primary/60 max-w-sm">
-              Experience the future of driving today. Premium electric car rental for those who refuse to settle.
-            </p>
+    <footer className="md:rounded-t-6xl relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center rounded-t-4xl border-t border-primary/10 bg-[radial-gradient(35%_128px_at_50%_0%,theme(backgroundColor.white/8%),transparent)] px-6 py-12 lg:py-16">
+      <div className="bg-primary/20 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur" />
+
+      <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
+        <AnimatedContainer className="space-y-4">
+          <div className="flex items-center gap-2 overflow-visible">
+            <Image
+              src="/assets/pic/andinlogo-removebg.png"
+              alt="Andin Transport Logo"
+              width={400}
+              height={120}
+              className="h-12 md:h-16 w-auto object-contain scale-[1.2] origin-left -ml-2"
+            />
           </div>
-          <div>
-            <h4 className="font-medium mb-6 text-primary">Company</h4>
-            <ul className="space-y-4 text-primary/60 text-sm">
-              <li><Link href="#" className="hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Press</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-medium mb-6 text-primary">Legal</h4>
-            <ul className="space-y-4 text-primary/60 text-sm">
-              <li><Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="hover:text-primary transition-colors">Cookie Policy</Link></li>
-            </ul>
-          </div>
+          <p suppressHydrationWarning className="text-primary/60 mt-8 text-sm md:mt-0">
+            © {new Date().getFullYear()} Andin Transport. All rights reserved.
+          </p>
+        </AnimatedContainer>
+
+        <div className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-3 xl:col-span-2 xl:mt-0">
+          {footerLinks.map((section, index) => (
+            <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
+              <div className="mb-10 md:mb-0">
+                <h3 className="text-xs font-medium text-primary">{section.label}</h3>
+                <ul className="text-primary/60 mt-4 space-y-2 text-sm">
+                  {section.links.map((link) => (
+                    <li key={link.title}>
+                      <a
+                        href={link.href}
+                        className="hover:text-primary inline-flex items-center transition-all duration-300"
+                      >
+                        {link.icon && <link.icon className="me-2 size-4" />}
+                        {link.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AnimatedContainer>
+          ))}
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-primary/10 text-primary/40 text-sm">
-          <p suppressHydrationWarning>© {new Date().getFullYear()} Electric. All rights reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link href="#" className="hover:text-primary transition-colors">Instagram</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Twitter</Link>
-            <Link href="#" className="hover:text-primary transition-colors">LinkedIn</Link>
-          </div>
-        </div>
-      </motion.div>
+      </div>
     </footer>
   );
-}
+};
+
+type ViewAnimationProps = {
+  delay?: number;
+  className?: ComponentProps<typeof motion.div>['className'];
+  children: ReactNode;
+};
+
+function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationProps) {
+  const shouldReduceMotion = useReducedMotion();
+
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
+  return (
+    <motion.div
+      initial={{ filter: 'blur(4px)', translateY: -8, opacity: 0 }}
+      whileInView={{ filter: 'blur(0px)', translateY: 0, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.8 }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+};
