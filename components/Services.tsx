@@ -5,20 +5,20 @@ import { CalendarDays, UserCheck, Headset } from 'lucide-react';
 import { useRef } from 'react';
 
 const features = [
-  { 
-    icon: CalendarDays, 
-    title: "Flexible scheduling", 
-    desc: "Daily, weekly, and monthly rates tailored to your itinerary." 
+  {
+    icon: CalendarDays,
+    title: "Flexible scheduling",
+    desc: "Daily, weekly, and monthly rates tailored to your itinerary."
   },
-  { 
-    icon: UserCheck, 
-    title: "Chauffeur services", 
-    desc: "Professional drivers and airport transfers available upon request." 
+  {
+    icon: UserCheck,
+    title: "Chauffeur services",
+    desc: "Professional drivers and airport transfers available upon request."
   },
-  { 
-    icon: Headset, 
-    title: "24/7 premium support", 
-    desc: "Dedicated roadside assistance and concierge service around the clock." 
+  {
+    icon: Headset,
+    title: "24/7 premium support",
+    desc: "Dedicated roadside assistance and concierge service around the clock."
   }
 ];
 
@@ -34,7 +34,7 @@ export function Services() {
   return (
     <section ref={ref} className="relative w-full py-24 lg:py-32 overflow-hidden bg-black" id="services">
       {/* Video Background */}
-      <motion.div 
+      <motion.div
         style={{ y }}
         className="absolute inset-0 z-0 scale-125"
       >
@@ -52,7 +52,7 @@ export function Services() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          
+
           {/* Left Column: Header & Intro */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -64,11 +64,11 @@ export function Services() {
             <div className="inline-block px-4 py-1.5 rounded-full border border-primary/30 text-xs font-semibold uppercase tracking-widest mb-8">
               Rental Services
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium leading-tight mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-medium leading-tight mb-8">
               Tailored services for<br />
               <span className="text-primary/60">every single journey</span>
             </h2>
-            <p className="text-lg md:text-xl text-primary/70 max-w-lg leading-relaxed">
+            <p className="text-base md:text-lg text-primary/70 max-w-lg leading-relaxed">
               Enjoy a hassle-free rental experience with transparent pricing, flexible pickup options, and 24/7 roadside assistance included with every premium vehicle.
             </p>
           </motion.div>
@@ -82,9 +82,9 @@ export function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: 0.2 + (i * 0.15), ease: [0.16, 1, 0.3, 1] }}
-                className="w-full bg-white/5 hover:bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex items-start gap-6 transition-colors group"
+                className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex items-start gap-6 transition-colors group"
               >
-                <div className="shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center transition-transform duration-500">
                   <feature.icon className="w-6 h-6 text-accent-warm drop-shadow-[0_0_8px_#ec3237]" />
                 </div>
                 <div>
@@ -94,7 +94,7 @@ export function Services() {
               </motion.div>
             ))}
           </div>
-          
+
         </div>
       </div>
     </section>
