@@ -1,8 +1,8 @@
 import type {Metadata} from 'next';
-import { Inter, Space_Grotesk } from 'next/font/google';
+import { Geist, Space_Grotesk } from 'next/font/google';
 import './globals.css'; // Global styles
 
-const inter = Inter({
+const geist = Geist({
   subsets: ['latin'],
   variable: '--font-sans',
 });
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${geist.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased selection:bg-accent-warm selection:text-white" suppressHydrationWarning>{children}</body>
     </html>
   );

@@ -1,24 +1,24 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'motion/react';
-import { CalendarDays, UserCheck, Headset } from 'lucide-react';
+import { CalendarBlank, UserCircleCheck, Headset } from '@phosphor-icons/react';
 import { useRef } from 'react';
 
 const features = [
   {
-    icon: CalendarDays,
+    icon: CalendarBlank,
     title: "Flexible scheduling",
-    desc: "Daily, weekly, and monthly rates tailored to your itinerary."
+    desc: "Rates by the day, week, or month — aligned to your exact itinerary."
   },
   {
-    icon: UserCheck,
+    icon: UserCircleCheck,
     title: "Chauffeur services",
-    desc: "Professional drivers and airport transfers available upon request."
+    desc: "Vetted drivers and direct airport transfers, dispatched on request."
   },
   {
     icon: Headset,
-    title: "24/7 premium support",
-    desc: "Dedicated roadside assistance and concierge service around the clock."
+    title: "Continuous support",
+    desc: "Roadside response and concierge ops, any hour."
   }
 ];
 
@@ -64,32 +64,37 @@ export function Services() {
             <div className="inline-block px-4 py-1.5 rounded-full border border-primary/30 text-xs font-semibold uppercase tracking-widest mb-8">
               Rental Services
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-medium leading-tight mb-8">
-              Tailored services for<br />
-              <span className="text-primary/60">every single journey</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tighter leading-none mb-8">
+              Services built for<br />
+              <span className="text-primary/50">every journey</span>
             </h2>
             <p className="text-base md:text-lg text-primary/70 max-w-lg leading-relaxed">
-              Enjoy a hassle-free rental experience with transparent pricing, flexible pickup options, and 24/7 roadside assistance included with every premium vehicle.
+              Transparent pricing, flexible pickup windows, and continuous roadside response — standard across the fleet.
             </p>
           </motion.div>
 
           {/* Right Column: Feature Cards */}
-          <div className="flex flex-col gap-6">
-            {features.map((feature, i) => (
+          <div className="flex flex-col gap-8">
+            {features.map((feature) => (
               <motion.div
-                key={i}
+                key={feature.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: 0.2 + (i * 0.15), ease: [0.16, 1, 0.3, 1] }}
-                className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex items-start gap-6 transition-colors group"
+                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ scale: 0.98, backgroundColor: "rgba(255,255,255,0.08)", transition: { type: "spring", stiffness: 400, damping: 25 } }}
+                className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex items-start gap-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] group"
               >
-                <div className="shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center transition-transform duration-500">
-                  <feature.icon className="w-6 h-6 text-accent-warm drop-shadow-[0_0_8px_#ec3237]" />
-                </div>
+                <motion.div
+                  className="shrink-0 w-12 h-12 rounded-full bg-accent-warm/15 flex items-center justify-center"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <feature.icon className="w-6 h-6 text-accent-warm" weight="regular" aria-hidden="true" />
+                </motion.div>
                 <div>
-                  <h3 className="text-xl font-medium text-primary mb-2">{feature.title}</h3>
-                  <p className="text-primary/60 leading-relaxed">{feature.desc}</p>
+                  <h3 className="text-xl font-medium text-primary tracking-tight mb-2">{feature.title}</h3>
+                  <p className="text-primary/50 leading-relaxed">{feature.desc}</p>
                 </div>
               </motion.div>
             ))}
