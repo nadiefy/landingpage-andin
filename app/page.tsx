@@ -3,7 +3,7 @@ import { Hero } from '@/components/Hero';
 import { ConnectedSystems } from '@/components/ConnectedSystems';
 import { Services } from '@/components/Services';
 import { About } from '@/components/About';
-import { Audience } from '@/components/Audience';
+
 import { CTA } from '@/components/CTA';
 import { Footer } from '@/components/Footer';
 
@@ -15,7 +15,7 @@ export default function Page() {
       <Services />
       <ConnectedSystems />
       <About />
-      <Audience />
+
       <CTA />
       <div className="w-full bg-black pt-12">
         <Footer />
