@@ -1,4 +1,4 @@
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import { Geist, Space_Grotesk } from 'next/font/google';
 import './globals.css'; // Global styles
 
@@ -13,11 +13,11 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: 'Electric | Premium Car Rental',
-  description: 'Experience the future of driving today. Premium electric car rental.',
+  title: 'Premium Car Rental',
+  description: 'Premium car rental.',
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geist.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased selection:bg-accent-warm selection:text-white" suppressHydrationWarning>{children}</body>
