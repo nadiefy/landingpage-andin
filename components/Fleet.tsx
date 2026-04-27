@@ -84,7 +84,7 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
       onMouseMove={handleMouseMove}
     >
       <motion.div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 hidden sm:block @media (prefers-reduced-motion: reduce) { display: none; }"
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 hidden sm:block motion-reduce:hidden"
         style={{
           background: useMotionTemplate`
             radial-gradient(
@@ -119,27 +119,28 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
   };
 
   return (
-    <SpotlightCard className="w-[85vw] sm:w-[400px] shrink-0 snap-start flex flex-col justify-between">
+    <SpotlightCard className="w-[78vw] sm:w-[340px] shrink-0 snap-start flex flex-col justify-between">
       <div className="flex flex-col flex-grow">
-        <div className="relative aspect-[4/3] w-full overflow-hidden group/image">
+        <div className="relative aspect-[16/10] w-full overflow-hidden group/image">
           <Image
             src={car.images[currentImage]}
             alt={car.name}
             fill
+            loading="lazy"
             className="object-cover"
-            sizes="(max-width: 640px) 85vw, 400px"
+            sizes="(max-width: 640px) 78vw, 340px"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
           
           <div className="absolute top-4 left-4">
-            <span className="bg-black/50 backdrop-blur-md text-zinc-300 text-[10px] font-medium tracking-widest uppercase px-2.5 py-1 border border-zinc-700/50">
+            <span className="bg-black/50 text-zinc-300 text-[10px] font-medium tracking-widest uppercase px-2.5 py-1 border border-zinc-700/50">
               {car.category}
             </span>
           </div>
 
           <div className="absolute inset-y-0 left-2 right-2 flex items-center justify-between opacity-0 group-hover/image:opacity-100 transition-opacity">
-             <button onClick={prevImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors" aria-label="Previous image"><CaretLeft weight="bold" className="w-4 h-4"/></button>
-             <button onClick={nextImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors" aria-label="Next image"><CaretRight weight="bold" className="w-4 h-4"/></button>
+             <button onClick={prevImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Previous image"><CaretLeft weight="bold" className="w-4 h-4"/></button>
+             <button onClick={nextImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Next image"><CaretRight weight="bold" className="w-4 h-4"/></button>
           </div>
           
           <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
@@ -149,9 +150,9 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
           </div>
         </div>
         
-        <div className="p-6 flex flex-col gap-6 relative z-10">
+        <div className="p-5 flex flex-col gap-6 relative z-10">
           <div>
-            <h3 className="text-xl sm:text-2xl font-display font-medium text-white tracking-tighter leading-tight mb-4">{car.name}</h3>
+            <h3 className="text-xl sm:text-2xl font-display font-medium text-white tracking-tighter leading-tight mb-2 text-pretty">{car.name}</h3>
             
             <div className="grid grid-cols-2 gap-4 text-sm text-zinc-400 border-t border-zinc-800/50 pt-4">
               <div className="flex items-center gap-2">
@@ -175,12 +176,12 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
         </div>
       </div>
       
-      <div className="p-6 pt-0 mt-auto">
+      <div className="px-5 pb-5 pt-0 mt-auto">
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-3 px-4 bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 group/btn"
+          className="w-full py-3 px-4 bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 group/btn focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           aria-label={`Reserve ${car.name} via WhatsApp`}
         >
           <WhatsappLogo className="w-5 h-5 group-hover/btn:scale-110 transition-transform" weight="fill" />
@@ -232,10 +233,10 @@ export function Fleet() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <button onClick={scrollLeft} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors" aria-label="Scroll left">
+          <button onClick={scrollLeft} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Scroll left">
             <CaretLeft className="w-5 h-5" weight="bold" />
           </button>
-          <button onClick={scrollRight} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors" aria-label="Scroll right">
+          <button onClick={scrollRight} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Scroll right">
             <CaretRight className="w-5 h-5" weight="bold" />
           </button>
         </motion.div>
@@ -250,16 +251,9 @@ export function Fleet() {
       >
         <div 
           ref={containerRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 lg:px-20 pb-10 scrollbar-hide"
+          className="flex gap-5 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 lg:px-20 xl:px-[calc((100vw-1280px)/2+5rem)] pb-10 [&::-webkit-scrollbar]:hidden touch-manipulation overscroll-x-contain"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
-          {/* Hide scrollbar for webkit */}
-          <style dangerouslySetInnerHTML={{__html: `
-            .scrollbar-hide::-webkit-scrollbar {
-                display: none;
-            }
-          `}} />
-          
           {fleet.map((car) => (
             <CarCard key={car.id} car={car} />
           ))}
