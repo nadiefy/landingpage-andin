@@ -82,19 +82,12 @@ export function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ scale: 0.98, backgroundColor: "rgba(255,255,255,0.08)", transition: { type: "spring", stiffness: 400, damping: 25 } }}
-                className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex items-start gap-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] group"
+                className="w-full bg-zinc-950 border border-zinc-800 rounded-sm p-6 md:p-8 flex items-start gap-6 group transition-colors duration-300 hover:border-zinc-300 hover:bg-zinc-900"
               >
-                <motion.div
-                  className="shrink-0 w-12 h-12 rounded-full bg-accent-warm/15 flex items-center justify-center"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <feature.icon className="w-6 h-6 text-accent-warm" weight="regular" aria-hidden="true" />
-                </motion.div>
+                <feature.icon className="w-6 h-6 text-zinc-300 shrink-0 mt-0.5" weight="regular" aria-hidden="true" />
                 <div>
-                  <h3 className="text-xl font-medium text-primary tracking-tight mb-2">{feature.title}</h3>
-                  <p className="text-primary/50 leading-relaxed">{feature.desc}</p>
+                  <h3 className="text-xl font-medium text-primary tracking-tighter mb-2">{feature.title}</h3>
+                  <p className="text-zinc-400 leading-relaxed">{feature.desc}</p>
                 </div>
               </motion.div>
             ))}
