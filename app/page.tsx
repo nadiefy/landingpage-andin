@@ -1,9 +1,8 @@
 import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
-import { ConnectedSystems } from '@/components/ConnectedSystems';
+import { Fleet } from '@/components/Fleet';
 import { Services } from '@/components/Services';
 import { About } from '@/components/About';
-
 import { CTA } from '@/components/CTA';
 import { Footer } from '@/components/Footer';
 
@@ -13,7 +12,7 @@ export default function Page() {
       <Navbar />
       <Hero />
       <Services />
-      <ConnectedSystems />
+      <Fleet />
       <About />
 
       <CTA />
