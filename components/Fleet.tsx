@@ -80,7 +80,7 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
 
   return (
     <div
-      className={`group relative flex h-full w-full flex-col overflow-hidden rounded-none border border-zinc-800 bg-zinc-950 ${className}`}
+      className={`group relative flex flex-col overflow-hidden rounded-none border border-zinc-800 bg-zinc-950 ${className}`}
       onMouseMove={handleMouseMove}
     >
       <motion.div
@@ -154,14 +154,10 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
           <div>
             <h3 className="text-xl sm:text-2xl font-display font-medium text-white tracking-tighter leading-tight mb-2 text-pretty">{car.name}</h3>
             
-            <div className="grid grid-cols-2 gap-4 text-sm text-zinc-400 border-t border-zinc-800/50 pt-4">
+            <div className="grid gap-4 text-sm text-zinc-400 border-t border-zinc-800/50 pt-4">
               <div className="flex items-center gap-2">
                 <UsersFour className="w-4 h-4 text-zinc-500" aria-hidden="true" />
                 <span>{car.seats} Seats</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Suitcase className="w-4 h-4 text-zinc-500" aria-hidden="true" />
-                <span className="truncate" title={car.luggage}>{car.luggage}</span>
               </div>
             </div>
             <div className="mt-4 pt-4 border-t border-zinc-800/50 flex flex-col gap-2">
