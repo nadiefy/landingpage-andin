@@ -1,99 +1,297 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'motion/react';
-import { CalendarBlank, UserCircleCheck, Headset } from '@phosphor-icons/react';
-import { useRef } from 'react';
+import { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import Image from 'next/image';
 
-const features = [
+const SERVICES_DATA = [
   {
-    icon: CalendarBlank,
+    id: "01",
     title: "Flexible scheduling",
-    desc: "Rates by the day, week, or month — aligned to your exact itinerary."
+    subtitle: "RATES BY THE DAY, WEEK, OR MONTH",
+    desc: "Rates by the day, week, or month — aligned to your exact itinerary. Keep full control of your transport logistics with options tailored for executive transfers, production shoots, and luxury tour schedules.",
+    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1000&auto=format&fit=crop",
+    specs: [
+      { label: "Minimum Rental", value: "1 Day" },
+      { label: "Pricing Model", value: "Daily / Weekly / Monthly" },
+      { label: "Vehicle Control", value: "Self-Drive or Chauffeur" }
+    ]
   },
   {
-    icon: UserCircleCheck,
+    id: "02",
     title: "Chauffeur services",
-    desc: "Vetted drivers and direct airport transfers, dispatched on request."
+    subtitle: "PROFESSIONAL DISPATCH ON DEMAND",
+    desc: "Professional, vetted drivers and direct airport transfers, dispatched on request. Experience flawless hospitality, absolute discretion, and route optimization from our English-speaking, fully uniformed chauffeurs.",
+    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop",
+    specs: [
+      { label: "Driver Level", value: "Certified Professional" },
+      { label: "Languages", value: "English & Indonesian" },
+      { label: "Service Area", value: "National Coverage" }
+    ]
   },
   {
-    icon: Headset,
+    id: "03",
     title: "Continuous support",
-    desc: "Roadside response and concierge ops, any hour."
+    subtitle: "24/7 ROADSIDE CONCIERGE & RESPONSE",
+    desc: "Roadside response and concierge operations, active at any hour. A dedicated dispatch team is constantly monitoring our fleet to handle vehicle swaps, route alterations, or roadside support instantly.",
+    image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=1000&auto=format&fit=crop",
+    specs: [
+      { label: "Response Time", value: "< 30 Minutes" },
+      { label: "Availability", value: "24 Hours / 7 Days" },
+      { label: "Support Channels", value: "Direct Phone & WhatsApp" }
+    ]
   }
 ];
 
 export function Services() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [detailsOpen, setDetailsOpen] = useState(true);
+  const shouldReduceMotion = useReducedMotion();
 
-  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  const handleTabHover = (index: number) => {
+    setActiveIndex(index);
+    setDetailsOpen(true);
+  };
+
+  const handleTabClick = (index: number) => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+    if (activeIndex === index) {
+      if (isMobile) {
+        setActiveIndex(null);
+      } else {
+        setDetailsOpen(!detailsOpen);
+      }
+    } else {
+      setActiveIndex(index);
+      setDetailsOpen(true);
+    }
+  };
+
+  const safeActiveIndex = activeIndex ?? 0;
 
   return (
-    <section ref={ref} className="relative w-full py-24 lg:py-32 overflow-hidden bg-black" id="services">
-      {/* Video Background */}
-      <motion.div
-        style={{ y }}
-        className="absolute inset-0 z-0 scale-125"
-      >
-        <div className="absolute inset-0 bg-black/70 z-10"></div>
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" type="video/mp4" />
-        </video>
-      </motion.div>
-
+    <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-black text-white" id="services">
       <div className="relative z-10 max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        
+        {/* Section Header */}
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="h-px w-6 bg-white/40"></div>
+            <span className="text-sm font-medium uppercase tracking-widest text-zinc-400 font-sans">
+              Our Capabilities
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tighter leading-none text-white">
+            Services built for<br />
+            <span className="text-zinc-500">every journey</span>
+          </h2>
+        </div>
 
-          {/* Left Column: Header & Intro */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col items-start text-left"
-          >
-            <div className="inline-block px-4 py-1.5 rounded-full border border-primary/30 text-xs font-semibold uppercase tracking-widest mb-8">
-              Rental Services
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tighter leading-none mb-8">
-              Services built for<br />
-              <span className="text-primary/50">every journey</span>
-            </h2>
-            <p className="text-base md:text-lg text-primary/70 max-w-lg leading-relaxed">
-              Transparent pricing, flexible pickup windows, and continuous roadside response — standard across the fleet.
-            </p>
-          </motion.div>
+        {/* Layout Grid: Desktop split-screen, Mobile stacked */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          {/* Left Column (Desktop typographic tabs) - Hidden on Mobile, Visible on LG */}
+          <div className="hidden lg:flex lg:col-span-5 flex-col gap-6">
+            {SERVICES_DATA.map((service, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <div
+                  key={service.id}
+                  className="group relative cursor-pointer py-4"
+                  onMouseEnter={() => handleTabHover(index)}
+                  onClick={() => handleTabClick(index)}
+                >
+                  <div className="flex items-center gap-4">
+                    {/* Active Warm Red Indicator */}
+                    <div className="relative w-6 h-6 flex items-center justify-center">
+                      {isActive && (
+                        <motion.div
+                          layoutId="activeTabIndicator"
+                          className="absolute w-1.5 h-6 bg-[#ec3237]"
+                          transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                      )}
+                    </div>
 
-          {/* Right Column: Feature Cards */}
-          <div className="flex flex-col gap-8">
-            {features.map((feature) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full bg-zinc-950 border border-zinc-800 rounded-sm p-6 md:p-8 flex items-start gap-6 group transition-colors duration-300 hover:border-zinc-300 hover:bg-zinc-900"
-              >
-                <feature.icon className="w-6 h-6 text-zinc-300 shrink-0 mt-0.5" weight="regular" aria-hidden="true" />
-                <div>
-                  <h3 className="text-xl font-medium text-primary tracking-tighter mb-2">{feature.title}</h3>
-                  <p className="text-zinc-400 leading-relaxed">{feature.desc}</p>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-zinc-500 font-sans tracking-widest">
+                        {service.id} /
+                      </span>
+                      <span
+                        className={`text-2xl md:text-3xl font-display font-medium tracking-tight transition-all duration-300 ${
+                          isActive
+                            ? 'text-white scale-100'
+                            : 'text-zinc-600 group-hover:text-zinc-300 scale-95 origin-left'
+                        }`}
+                      >
+                        {service.title}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
+              );
+            })}
+          </div>
+
+          {/* Right Column (Desktop Glassmorphic Showcase card) - Hidden on Mobile */}
+          <div className="hidden lg:block lg:col-span-7 relative aspect-[16/10] w-full overflow-hidden border border-zinc-800 bg-zinc-950">
+            {/* Background Image Showcase */}
+            <div className="absolute inset-0 z-0">
+              <AnimatePresence mode="popLayout">
+                <motion.div
+                  key={safeActiveIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.4, ease: "easeInOut" }}
+                  className="absolute inset-0"
+                >
+                  <Image
+                    src={SERVICES_DATA[safeActiveIndex].image}
+                    alt={SERVICES_DATA[safeActiveIndex].title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 700px"
+                    priority
+                    className="object-cover"
+                  />
+                  {/* Subtle dark linear gradient overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Showcase Overlay (Details panel) */}
+            <AnimatePresence>
+              {detailsOpen && (
+                <motion.div
+                  initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
+                  animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+                  exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-x-6 bottom-6 z-10 p-6 bg-zinc-950/70 border border-zinc-800/80 backdrop-blur-md rounded-none flex flex-col gap-4 max-w-lg"
+                >
+                  <div>
+                    <span className="text-[10px] font-semibold text-[#ec3237] uppercase tracking-widest block mb-1 font-sans">
+                      {SERVICES_DATA[safeActiveIndex].subtitle}
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-display font-medium text-white tracking-tight leading-tight">
+                      {SERVICES_DATA[safeActiveIndex].title}
+                    </h3>
+                  </div>
+
+                  <p className="text-sm text-zinc-300 leading-relaxed font-sans">
+                    {SERVICES_DATA[safeActiveIndex].desc}
+                  </p>
+
+                  {/* Specifications Table */}
+                  <div className="border-t border-zinc-800/80 pt-4 mt-2">
+                    <h4 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-3 font-sans">
+                      Specifications
+                    </h4>
+                    <div className="grid grid-cols-1 gap-2">
+                      {SERVICES_DATA[safeActiveIndex].specs.map((spec, i) => (
+                        <div key={i} className="flex justify-between text-xs py-1 border-b border-zinc-900/50 last:border-0 font-sans">
+                          <span className="text-zinc-500">{spec.label}</span>
+                          <span className="text-zinc-200 font-medium">{spec.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Mobile Layout (Vertical Accordion) - Visible on Mobile/Tablet, Hidden on LG */}
+          <div className="flex lg:hidden flex-col gap-4 col-span-1">
+            {SERVICES_DATA.map((service, index) => {
+              const isActive = index === activeIndex;
+              return (
+                <div
+                  key={service.id}
+                  className="border border-zinc-800 bg-zinc-950 overflow-hidden transition-colors duration-300"
+                >
+                  {/* Accordion Header */}
+                  <button
+                    onClick={() => handleTabClick(index)}
+                    className="w-full py-5 px-6 flex items-center justify-between text-left focus:outline-none focus-visible:ring-1 focus-visible:ring-[#ec3237]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="text-xs text-zinc-500 font-sans font-medium">
+                        {service.id} /
+                      </span>
+                      <h3
+                        className={`text-lg md:text-xl font-display font-medium tracking-tight transition-colors duration-300 ${
+                          isActive ? 'text-white' : 'text-zinc-400'
+                        }`}
+                      >
+                        {service.title}
+                      </h3>
+                    </div>
+                    {/* Expand/Collapse sign */}
+                    <span className={`text-xl font-light text-zinc-400 transform transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`}>
+                      {isActive ? '−' : '+'}
+                    </span>
+                  </button>
+
+                  {/* Accordion Content */}
+                  <AnimatePresence initial={false}>
+                    {isActive && (
+                      <motion.div
+                        initial={shouldReduceMotion ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+                        animate={shouldReduceMotion ? { height: 'auto', opacity: 1 } : { height: 'auto', opacity: 1 }}
+                        exit={shouldReduceMotion ? { height: 0, opacity: 0 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-6 pb-6 flex flex-col gap-4 border-t border-zinc-900">
+                          {/* Image */}
+                          <div className="relative aspect-[16/10] w-full mt-4 overflow-hidden">
+                            <Image
+                              src={service.image}
+                              alt={service.title}
+                              fill
+                              sizes="(max-width: 768px) 100vw, 500px"
+                              className="object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                          </div>
+
+                          {/* Description */}
+                          <div>
+                            <span className="text-[9px] font-semibold text-[#ec3237] uppercase tracking-widest block mb-1 font-sans">
+                              {service.subtitle}
+                            </span>
+                            <p className="text-sm text-zinc-300 leading-relaxed font-sans">
+                              {service.desc}
+                            </p>
+                          </div>
+
+                          {/* Specs Table */}
+                          <div className="border-t border-zinc-900 pt-4 mt-2">
+                            <h4 className="text-[9px] font-semibold text-zinc-500 uppercase tracking-widest mb-3 font-sans">
+                              Specifications
+                            </h4>
+                            <div className="grid grid-cols-1 gap-2">
+                              {service.specs.map((spec, i) => (
+                                <div key={i} className="flex justify-between text-xs py-1 border-b border-zinc-900/50 last:border-0 font-sans">
+                                  <span className="text-zinc-500">{spec.label}</span>
+                                  <span className="text-zinc-200 font-medium">{spec.value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
 
         </div>
+
       </div>
     </section>
   );
