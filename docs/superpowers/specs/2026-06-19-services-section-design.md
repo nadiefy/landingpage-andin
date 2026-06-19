@@ -46,7 +46,6 @@ A glassmorphic preview container containing:
 - **Content Overlay**:
   - Service title and description text.
   - A structured specs grid highlighting features (e.g., Minimum Booking, Support response times).
-  - A direct "Book via WhatsApp" CTA button, styled as a flat premium pill.
 
 ---
 
@@ -57,7 +56,7 @@ On tablet and mobile screens, the split-screen transitions to a **Vertical Accor
 - Each accordion header acts as a large tap target with its numeric prefix and border.
 - Tapping an inactive service collapses the current active card and expands the selected card downward.
 - Framer Motion manages height expansions (`initial={{ height: 0, opacity: 0 }}` to `animate={{ height: "auto", opacity: 1 }}`) with `overflow-hidden` container clipping.
-- Expanded states expose the service's cinematic photo, description, specs table, and WhatsApp CTA button inline.
+- Expanded states expose the service's cinematic photo, description, and specs table inline.
 
 ---
 
@@ -75,8 +74,7 @@ export const SERVICES_DATA = [
       { label: "Minimum Rental", value: "1 Day" },
       { label: "Pricing Model", value: "Daily / Weekly / Monthly" },
       { label: "Vehicle Control", value: "Self-Drive or Chauffeur" }
-    ],
-    whatsappMsg: "Halo, saya tertarik dengan layanan Flexible Scheduling di Andin Transport. Bisa bantu jelaskan detailnya?"
+    ]
   },
   {
     id: "02",
@@ -88,8 +86,7 @@ export const SERVICES_DATA = [
       { label: "Driver Level", value: "Certified Professional" },
       { label: "Languages", value: "English & Indonesian" },
       { label: "Service Area", value: "National Coverage" }
-    ],
-    whatsappMsg: "Halo, saya tertarik dengan layanan Chauffeur Services di Andin Transport. Bisa bantu jelaskan detailnya?"
+    ]
   },
   {
     id: "03",
@@ -101,8 +98,7 @@ export const SERVICES_DATA = [
       { label: "Response Time", value: "< 30 Minutes" },
       { label: "Availability", value: "24 Hours / 7 Days" },
       { label: "Support Channels", value: "Direct Phone & WhatsApp" }
-    ],
-    whatsappMsg: "Halo, saya tertarik dengan layanan Continuous Support di Andin Transport. Bagaimana cara kerjanya jika ada keadaan darurat?"
+    ]
   }
 ];
 ```
@@ -126,5 +122,4 @@ export const SERVICES_DATA = [
 3. Test layout response by resizing viewport from desktop to mobile:
    - Verify layout wraps to single vertical stack.
    - Verify accordions collapse/expand cleanly when tapped.
-4. Verify WhatsApp button links load the correct Indonesian pre-filled message.
-5. Verify contrast levels of text over the dark gradients overlaying the images.
+4. Verify contrast levels of text over the dark gradients overlaying the images.

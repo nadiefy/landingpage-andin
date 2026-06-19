@@ -10,8 +10,8 @@
 ## 1. Goal
 
 - **Problem:** The current services section uses a generic card-grid with static icons and a basic video background. This layout creates an "AI-generated template" vibe, fails to communicate luxury, and does not capture the premium brand value of Andin Transport.
-- **Solution:** Implement a split-screen layout on desktop where hovering over service tabs dynamically transitions high-fidelity luxury automotive photography on the right side along with specifications and direct WhatsApp CTAs. On mobile, transition this layout into a clean vertical accordion with smooth height expansions.
-- **Impact:** Improve average session time by 15-20% through interactive hover states, and lift WhatsApp lead generation conversion rate by presenting structured specifications and customized pre-filled messages.
+- **Solution:** Implement a split-screen layout on desktop where hovering over service tabs dynamically transitions high-fidelity luxury automotive photography on the right side along with specifications. On mobile, transition this layout into a clean vertical accordion with smooth height expansions.
+- **Impact:** Improve average session time by 15-20% through interactive hover states.
 
 ---
 
@@ -28,14 +28,13 @@
 - **US2 (Desktop Toggle):** As a desktop user, I want to click on the currently active service tab so that I can toggle the detailed specs panel open or closed, allowing me to view the clean cinematic image in full bleed.
 - **US3 (Mobile Accordion):** As a mobile user, I want to tap on a service row so that I can expand its details and image inline and read the information easily on a portrait screen.
 - **US4 (Accessibility):** As a user with motion sensitivity, I want all showcase switches and accordion expansions to occur instantly when I have `prefers-reduced-motion` enabled on my device.
-- **US5 (Direct Booking):** As a coordinator, I want to click a CTA button on any service details panel so that I can open WhatsApp with a pre-filled booking inquiry specific to that service.
 
 ---
 
 ## 4. Requirements
 
 ### Functional Requirements
-- **F1 (Split Screen):** On viewports `>= 1024px`, render a split layout. The left column holds typographic tabs (`01 / Flexible scheduling`, `02 / Chauffeur services`, `03 / Continuous support`). The right column holds a glassmorphic card presenting details, specs, and CTAs.
+- **F1 (Split Screen):** On viewports `>= 1024px`, render a split layout. The left column holds typographic tabs (`01 / Flexible scheduling`, `02 / Chauffeur services`, `03 / Continuous support`). The right column holds a glassmorphic card presenting details and specs.
 - **F2 (Tab States):** Active tab has full opacity, bold text, and a warm-red (`#ec3237`) active indicator. Inactive tabs are dimmed to 35% opacity and scaled down (`scale-95`).
 - **F3 (Hover-to-Showcase):** Hovering over any tab updates the active showcase index, changing the image and text on the right side.
 - **F4 (Click-to-Toggle):** Clicking the active tab toggles the right-side details panel (sliding it out or fading it out, leaving the background image in full bleed).
@@ -44,12 +43,11 @@
   - *Scheduling*: Min booking (1 Day), Pricing models, Self-Drive/Chauffeur.
   - *Chauffeur*: Driver level, Languages, Coverage area.
   - *Support*: Response time (<30 mins), Availability (24/7), Support channels.
-- **F7 (WhatsApp CTA):** Render a WhatsApp button linking to `https://wa.me/628123456789` with a pre-filled Indonesian text specific to the service.
 
 ### Non-Functional Requirements
 - **NF1 (Performance):** Showcase images must use Next.js `<Image />` with optimized widths and lazy loading.
 - **NF2 (Typography):** Heading typography must match Space Grotesk (`var(--font-display)`); body typography must match Geist (`var(--font-sans)`).
-- **NF3 (Touch Targets):** Mobile accordion headers and CTA buttons must satisfy WCAG AA (minimum `48px` clickable height).
+- **NF3 (Touch Targets):** Mobile accordion headers must satisfy WCAG AA (minimum `48px` clickable height).
 - **NF4 (Motion Control):** Respect user's `prefers-reduced-motion` system settings. Set transition duration to `0s` if enabled.
 
 ---
@@ -66,7 +64,7 @@
 - **Mobile Accordion View:**
   - Given the user is on a mobile viewport (`< 1024px`),
   - When the user taps "01 / FLEXIBLE SCHEDULING",
-  - Then it expands downward smoothly to show the cabin image, scheduling details, and WhatsApp button.
+  - Then it expands downward smoothly to show the cabin image and scheduling details.
   - When the user then taps "02 / CHAUFFEUR SERVICES",
   - Then the scheduling details accordion collapses and the chauffeur services accordion expands.
 
@@ -75,7 +73,7 @@
 ## 6. Out of Scope
 
 - Integrating a backend booking database or scheduling calendar.
-- Adding WhatsApp user login/authentication.
+- Adding WhatsApp booking CTAs or pre-filled message links in this section.
 - Live chat agent integrations.
 
 ---
