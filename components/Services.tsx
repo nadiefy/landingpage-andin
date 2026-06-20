@@ -56,9 +56,7 @@ export function Services() {
   const handleTabClick = (index: number) => {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
     if (activeIndex === index) {
-      if (isMobile) {
-        setActiveIndex(null);
-      } else {
+      if (!isMobile) {
         setDetailsOpen(!detailsOpen);
       }
     } else {
@@ -209,7 +207,9 @@ export function Services() {
               return (
                 <div
                   key={service.id}
-                  className="border border-zinc-800 bg-zinc-950 overflow-hidden transition-colors duration-300"
+                  className={`overflow-hidden transition-all duration-300 rounded-none ${
+                    isActive ? 'bg-zinc-900/40' : 'bg-transparent'
+                  }`}
                 >
                   {/* Accordion Header */}
                   <button
@@ -228,10 +228,6 @@ export function Services() {
                         {service.title}
                       </h3>
                     </div>
-                    {/* Expand/Collapse sign */}
-                    <span className={`text-xl font-light text-zinc-400 transform transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`}>
-                      {isActive ? '−' : '+'}
-                    </span>
                   </button>
 
                   {/* Accordion Content */}
@@ -241,12 +237,17 @@ export function Services() {
                         initial={shouldReduceMotion ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
                         animate={shouldReduceMotion ? { height: 'auto', opacity: 1 } : { height: 'auto', opacity: 1 }}
                         exit={shouldReduceMotion ? { height: 0, opacity: 0 } : { height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        transition={shouldReduceMotion ? { duration: 0 } : { type: "spring", stiffness: 100, damping: 20 }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 flex flex-col gap-4 border-t border-zinc-900">
+                        <div className="mx-6 mb-6 p-6 flex flex-col gap-6 bg-white/[0.02] backdrop-blur-md border border-white/[0.05] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] shadow-2xl shadow-black/60">
                           {/* Image */}
-                          <div className="relative aspect-[16/10] w-full mt-4 overflow-hidden">
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
+                            className="relative aspect-[5/2] w-full overflow-hidden"
+                          >
                             <Image
                               src={service.image}
                               alt={service.title}
@@ -254,8 +255,8 @@ export function Services() {
                               sizes="(max-width: 768px) 100vw, 500px"
                               className="object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                          </div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+                          </motion.div>
 
                           {/* Description */}
                           <div>
@@ -268,13 +269,13 @@ export function Services() {
                           </div>
 
                           {/* Specs Table */}
-                          <div className="border-t border-zinc-900 pt-4 mt-2">
+                          <div className="pt-2">
                             <h4 className="text-[9px] font-semibold text-zinc-500 uppercase tracking-widest mb-3 font-sans">
                               Specifications
                             </h4>
-                            <div className="grid grid-cols-1 gap-2">
+                            <div className="grid grid-cols-1 divide-y divide-zinc-800/10">
                               {service.specs.map((spec, i) => (
-                                <div key={i} className="flex justify-between text-xs py-1 border-b border-zinc-900/50 last:border-0 font-sans">
+                                <div key={i} className="flex justify-between text-xs py-2 font-sans">
                                   <span className="text-zinc-500">{spec.label}</span>
                                   <span className="text-zinc-200 font-medium">{spec.value}</span>
                                 </div>
