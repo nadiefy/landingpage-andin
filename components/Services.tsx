@@ -59,6 +59,19 @@ export function Services() {
     if (activeIndex === index) {
       if (isMobile) {
         setActiveIndex(null);
+
+        // Auto-scroll back to section top when collapsing all items
+        setTimeout(() => {
+          const section = document.getElementById('services');
+          if (section) {
+            const navbarHeight = 80;
+            const sectionPosition = section.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: sectionPosition - navbarHeight,
+              behavior: shouldReduceMotion ? 'auto' : 'smooth'
+            });
+          }
+        }, 150);
       } else {
         setDetailsOpen(!detailsOpen);
       }
@@ -225,7 +238,7 @@ export function Services() {
                 <div
                   ref={(el) => { itemRefs.current[index] = el; }}
                   key={service.id}
-                  className={`overflow-hidden transition-all duration-300 rounded-none ${
+                  className={`relative overflow-hidden transition-all duration-300 rounded-none ${
                     isActive ? 'bg-zinc-900/40' : 'bg-transparent'
                   }`}
                 >
@@ -252,6 +265,7 @@ export function Services() {
                   <AnimatePresence initial={false}>
                     {isActive && (
                       <motion.div
+                        key={service.id}
                         initial={shouldReduceMotion ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
                         animate={shouldReduceMotion ? { height: 'auto', opacity: 1 } : { height: 'auto', opacity: 1 }}
                         exit={shouldReduceMotion ? { height: 0, opacity: 0 } : { height: 0, opacity: 0 }}
