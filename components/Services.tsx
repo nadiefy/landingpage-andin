@@ -56,7 +56,9 @@ export function Services() {
   const handleTabClick = (index: number) => {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
     if (activeIndex === index) {
-      if (!isMobile) {
+      if (isMobile) {
+        setActiveIndex(null);
+      } else {
         setDetailsOpen(!detailsOpen);
       }
     } else {

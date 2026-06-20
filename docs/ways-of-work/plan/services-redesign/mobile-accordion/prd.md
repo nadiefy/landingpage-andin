@@ -29,8 +29,8 @@
   - Active/expanded state must receive a subtle background color boost (`bg-zinc-900/40`).
 - **FR-3: Icon-less Toggles:**
   - Remove the `+`/`−` text or icon buttons on the right side. The header text and index identifier are the sole elements in the accordion header.
-- **FR-4: Persistent Active Item:**
-  - At least one service item must remain expanded on mobile at all times (Option A). Tapping the currently active item does not collapse it.
+- **FR-4: Togglable Active Item:**
+  - Accordion items can be collapsed by tapping the active header again, returning the accordion layout to a fully collapsed typographic list with zero items expanded.
 - **FR-5: Glassmorphic Expanded Content:**
   - The expanded card background must use `bg-white/[0.02]` or `bg-zinc-900/30` with `backdrop-blur-md`.
   - Apply an ultra-thin border overlay `border border-white/[0.05]`.
@@ -58,7 +58,7 @@
 |:---|:---|:---|:---|
 | **AC-1** | User loads page on viewport < 1024px | Renders services list | No border boxes or outline boxes are visible; collapsed items are fully transparent. |
 | **AC-2** | User taps an inactive service header | Active index changes | The previous active item collapses, the new item expands, and its background shifts to `bg-zinc-900/40`. |
-| **AC-3** | User taps the currently active header | Header is tapped | The active item remains expanded (Option A). |
+| **AC-3** | User taps the currently active header | Header is tapped | The active item collapses, leaving the accordion in a fully collapsed state. |
 | **AC-4** | Active accordion item expands | Panel is visible | Shows glassmorphic details panel with white border overlay, top edge highlight, and fade-in cinematic aspect image strip. |
 | **AC-5** | System preference "Reduce Motion" is enabled | User taps service header | The content collapses/expands instantly without sliding height or opacity transitions. |
 

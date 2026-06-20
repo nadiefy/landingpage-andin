@@ -24,7 +24,7 @@ This specification outlines the transition to **Approach A: Elevation + Surgical
   - **Collapsed State:** Transparent background (`bg-transparent`) sitting directly on the pure black page canvas.
   - **Expanded State:** The active item receives a subtle, soft background tint (`bg-zinc-900/40`) to create a perception of visual lift (elevation).
   - **No Icons:** Remove the `+`/`−` text or icon signifier on the right side. Visual indicators are restricted solely to the active background shift and the physical expansion of the content panel.
-  - **Persistent Open State:** At least one service item must remain expanded on mobile at all times (tapping an already active header will not collapse it, preventing empty or static typographic layouts).
+  - **Togglable Active State:** Accordion items can be collapsed by tapping the active header again, returning the accordion layout to a fully collapsed typographic list with zero items expanded.
 
 ### 2.2 Glassmorphic Content Panel
 The expanded accordion panel will use surgical glassmorphism to establish micro-depth on mobile:

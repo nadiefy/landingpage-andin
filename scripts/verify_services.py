@@ -104,6 +104,14 @@ def run():
         else:
             print("Error: Accordion content did not expand")
             sys.exit(1)
+
+        print("Tapping on Chauffeur services accordion header again to collapse it...")
+        accordion_header_1.click()
+        mobile_desc.wait_for(state='hidden', timeout=3000)
+        if mobile_desc.is_visible():
+            print("Error: Accordion did not collapse when clicked again")
+            sys.exit(1)
+        print("Success: Mobile accordion click-to-collapse works!")
             
         print("Closing browser...")
         browser.close()
