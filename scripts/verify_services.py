@@ -76,13 +76,14 @@ def run():
             print("Error: Accordion headers not visible on mobile")
             sys.exit(1)
             
-        # Take a mobile screenshot of services section specifically
-        page.locator('#services').screenshot(path=r"C:\Users\nadief\.gemini\antigravity-ide\brain\b382c9bb-1958-4ac8-88a7-82928080de69\services_mobile.png")
-        print("Mobile screenshot saved to artifacts/services_mobile.png")
-        
         # Print bounding box of the description
         initial_desc = page.locator('.lg\\:hidden').get_by_text('Keep full control of your transport logistics').first
         initial_desc.wait_for(state='visible', timeout=3000)
+        time.sleep(1.0) # wait for animations to settle
+
+        # Take a mobile screenshot of services section specifically
+        page.locator('#services').screenshot(path=r"C:\Users\nadief\.gemini\antigravity-ide\brain\b382c9bb-1958-4ac8-88a7-82928080de69\services_mobile.png")
+        print("Mobile screenshot saved to artifacts/services_mobile.png")
         if not initial_desc.is_visible():
             print("Error: Initial accordion content is not expanded")
             sys.exit(1)
