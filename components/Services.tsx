@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import Image from 'next/image';
 
@@ -47,6 +47,7 @@ export function Services() {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   const [detailsOpen, setDetailsOpen] = useState(true);
   const shouldReduceMotion = useReducedMotion();
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleTabHover = (index: number) => {
     setActiveIndex(index);
@@ -64,13 +65,27 @@ export function Services() {
     } else {
       setActiveIndex(index);
       setDetailsOpen(true);
+
+      if (isMobile) {
+        setTimeout(() => {
+          const element = itemRefs.current[index];
+          if (element) {
+            const navbarHeight = 80; // height of fixed navbar
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({
+              top: elementPosition - navbarHeight,
+              behavior: shouldReduceMotion ? 'auto' : 'smooth'
+            });
+          }
+        }, 150); // timeout to let motion height expand render
+      }
     }
   };
 
   const safeActiveIndex = activeIndex ?? 0;
 
   return (
-    <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-black text-white" id="services">
+    <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-black text-white scroll-mt-20" id="services">
       <div className="relative z-10 max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
         
         {/* Section Header */}
@@ -208,6 +223,7 @@ export function Services() {
               const isActive = index === activeIndex;
               return (
                 <div
+                  ref={(el) => { itemRefs.current[index] = el; }}
                   key={service.id}
                   className={`overflow-hidden transition-all duration-300 rounded-none ${
                     isActive ? 'bg-zinc-900/40' : 'bg-transparent'
