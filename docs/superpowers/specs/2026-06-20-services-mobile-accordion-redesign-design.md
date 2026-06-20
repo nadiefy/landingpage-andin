@@ -24,6 +24,7 @@ This specification outlines the transition to **Approach A: Elevation + Surgical
   - **Collapsed State:** Transparent background (`bg-transparent`) sitting directly on the pure black page canvas.
   - **Expanded State:** The active item receives a subtle, soft background tint (`bg-zinc-900/40`) to create a perception of visual lift (elevation).
   - **No Icons:** Remove the `+`/`−` text or icon signifier on the right side. Visual indicators are restricted solely to the active background shift and the physical expansion of the content panel.
+  - **Persistent Open State:** At least one service item must remain expanded on mobile at all times (tapping an already active header will not collapse it, preventing empty or static typographic layouts).
 
 ### 2.2 Glassmorphic Content Panel
 The expanded accordion panel will use surgical glassmorphism to establish micro-depth on mobile:
@@ -37,6 +38,7 @@ The expanded accordion panel will use surgical glassmorphism to establish micro-
 - **Cinematic Accent Image:**
   - Crop the service image to a wide cinematic aspect ratio (`aspect-[5/2]` or `aspect-[21/9]`).
   - Fade the lower edge into the details panel using an absolute-overlay gradient: `bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent`.
+  - **Entrance Animation:** The image will fade in (`opacity: 0` to `opacity: 1` over 300ms) inside the expanding container to prevent harsh layout pop-in.
 - **Spacing-Based Content flow:**
   - Remove horizontal divider borders (`border-t border-zinc-900`) between the image, subtitle, and text content.
   - Rely on vertical spacing (`space-y-6`) and typographic hierarchy for readability.
