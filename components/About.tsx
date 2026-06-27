@@ -15,7 +15,7 @@ export function About() {
   const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
   return (
-    <section className="w-full bg-black py-24 lg:py-32" id="about">
+    <section className="w-full bg-black py-24 lg:py-32 scroll-mt-20 lg:scroll-mt-0" id="about">
       <div className="max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

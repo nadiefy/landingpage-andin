@@ -98,7 +98,7 @@ export function Services() {
   const safeActiveIndex = activeIndex ?? 0;
 
   return (
-    <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-black text-white scroll-mt-20" id="services">
+    <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-black text-white scroll-mt-20 lg:scroll-mt-0" id="services">
       <div className="relative z-10 max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
         
         {/* Section Header */}

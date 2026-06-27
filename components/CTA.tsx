@@ -14,7 +14,7 @@ export function CTA() {
   const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
   return (
-    <section className="w-full bg-black py-24 lg:py-32 px-7 md:px-12 lg:px-20" id="contact">
+    <section className="w-full bg-black py-24 lg:py-32 px-7 md:px-12 lg:px-20 scroll-mt-20 lg:scroll-mt-0" id="contact">
       <motion.div
         ref={ref}
         className="max-w-7xl mx-auto relative rounded-[2.5rem] overflow-hidden bg-white/5 border border-white/10"

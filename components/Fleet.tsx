@@ -204,7 +204,7 @@ export function Fleet() {
   };
 
   return (
-    <section className="w-full bg-black py-24 lg:py-32 overflow-hidden relative" id="fleet">
+    <section className="w-full bg-black py-24 lg:py-32 overflow-hidden relative scroll-mt-20 lg:scroll-mt-0" id="fleet">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
