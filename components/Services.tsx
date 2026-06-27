@@ -8,7 +8,7 @@ const SERVICES_DATA = [
   {
     id: "01",
     title: "Flexible scheduling",
-    subtitle: "RATES BY THE DAY, WEEK, OR MONTH",
+    subtitle: "Flexible daily or monthly rates",
     desc: "Rates by the day, week, or month — aligned to your exact itinerary. Keep full control of your transport logistics with options tailored for executive transfers, production shoots, and luxury tour schedules.",
     image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1000&auto=format&fit=crop",
     specs: [
@@ -20,7 +20,7 @@ const SERVICES_DATA = [
   {
     id: "02",
     title: "Chauffeur services",
-    subtitle: "PROFESSIONAL DISPATCH ON DEMAND",
+    subtitle: "Professional chauffeurs on call",
     desc: "Professional, vetted drivers and direct airport transfers, dispatched on request. Experience flawless hospitality, absolute discretion, and route optimization from our English-speaking, fully uniformed chauffeurs.",
     image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop",
     specs: [
@@ -32,7 +32,7 @@ const SERVICES_DATA = [
   {
     id: "03",
     title: "Continuous support",
-    subtitle: "24/7 ROADSIDE CONCIERGE & RESPONSE",
+    subtitle: "Roadside help around the clock",
     desc: "Roadside response and concierge operations, active at any hour. A dedicated dispatch team is constantly monitoring our fleet to handle vehicle swaps, route alterations, or roadside support instantly.",
     image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=1000&auto=format&fit=crop",
     specs: [
