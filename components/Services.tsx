@@ -102,14 +102,14 @@ export function Services() {
       <div className="relative z-10 max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
         
         {/* Section Header */}
-        <div className="mb-16">
+        <div className="mb-16 lg:mb-24">
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-6 bg-white/40"></div>
             <span className="text-sm font-medium uppercase tracking-widest text-zinc-400 font-sans">
               Our Capabilities
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium tracking-tighter leading-none text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
             Services built for<br />
             <span className="text-zinc-500">every journey</span>
           </h2>
@@ -162,7 +162,7 @@ export function Services() {
           </div>
 
           {/* Right Column (Desktop Glassmorphic Showcase card) - Hidden on Mobile */}
-          <div className="hidden lg:block lg:col-span-7 relative aspect-[16/10] w-full overflow-hidden border border-zinc-800 bg-zinc-950">
+          <div className="hidden lg:block lg:col-span-7 relative aspect-[16/10] w-full overflow-hidden border border-zinc-800 bg-zinc-950 lg:-mt-10">
             {/* Background Image Showcase */}
             <div className="absolute inset-0 z-0">
               <AnimatePresence mode="popLayout">
