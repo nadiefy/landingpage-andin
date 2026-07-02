@@ -29,90 +29,44 @@ def run():
         headings = page.locator('#services h2')
         print(f"Heading text: {headings.inner_text()}")
         
-        # Hover over the second tab "Chauffeur services"
-        chauffeur_tab = page.locator('#services').get_by_text('Chauffeur services').first
-        if chauffeur_tab.is_visible():
-            print("Hovering over Chauffeur services tab...")
-            chauffeur_tab.hover()
-            time.sleep(1.0) # Wait for cross-dissolve
-            
-            # Take a debugging screenshot
-            page.screenshot(path=r"C:\Users\nadief\.gemini\antigravity-ide\brain\b382c9bb-1958-4ac8-88a7-82928080de69\services_hover.png")
-            print("Screenshot saved to artifacts/services_hover.png")
-            
-            # Print text of details panel
-            showcase = page.locator('#services').inner_text()
-            print("--- Services Section Inner Text ---")
-            print(showcase)
-            print("-----------------------------------")
-            
-            # Assert details updated
-            desc = page.get_by_text('Experience flawless hospitality').first
-            if desc.is_visible():
-                print("Success: Desktop hover transition works!")
-            else:
-                print("Error: Details did not update on hover")
+        # Verify all 3 cards are visible on desktop
+        card_titles = ["Flexible scheduling", "Chauffeur services", "Continuous support"]
+        for title in card_titles:
+            card = page.locator('#services').get_by_text(title).first
+            if not card.is_visible():
+                print(f"Error: Card with title '{title}' is not visible on desktop")
                 sys.exit(1)
-        else:
-            print("Error: Chauffeur services tab not visible on desktop viewport")
+        
+        # Verify no images or specs tables exist in Services
+        img_count = page.locator('#services img').count()
+        if img_count > 0:
+            print(f"Error: Found {img_count} images in Services section, expected 0")
             sys.exit(1)
             
-        # 3. Test mobile accordion layout
+        # Take a desktop screenshot
+        screenshot_path = r"C:\Users\nadief\.gemini\antigravity-ide\brain\b382c9bb-1958-4ac8-88a7-82928080de69\services_desktop_grid.png"
+        page.screenshot(path=screenshot_path, full_page=False)
+        print(f"Desktop screenshot saved to {screenshot_path}")
+        
+        # 3. Test mobile layout (stacked view)
         print("Setting viewport to mobile size (390x844)...")
         page.set_viewport_size({"width": 390, "height": 844})
-        print("Reloading page to reset active states on mobile...")
+        print("Reloading page to render mobile view...")
         page.goto('http://127.0.0.1:3000')
         page.wait_for_load_state('networkidle')
-        time.sleep(0.5)
+        time.sleep(1.0)
         
-        # Scroll services section into view
-        print("Scrolling services section into view...")
-        services_section.scroll_into_view_if_needed()
-        time.sleep(0.5)
-        
-        # Verify that accordion headers are visible
-        accordion_header_0 = page.locator('.lg\\:hidden').get_by_text('Flexible scheduling').first
-        if not accordion_header_0.is_visible():
-            print("Error: Accordion headers not visible on mobile")
-            sys.exit(1)
-            
-        # Print bounding box of the description
-        initial_desc = page.locator('.lg\\:hidden').get_by_text('Keep full control of your transport logistics').first
-        initial_desc.wait_for(state='visible', timeout=3000)
-        time.sleep(1.0) # wait for animations to settle
-
+        # Verify all 3 cards are still visible simultaneously on mobile
+        for title in card_titles:
+            card = page.locator('#services').get_by_text(title).first
+            if not card.is_visible():
+                print(f"Error: Card with title '{title}' is not visible on mobile")
+                sys.exit(1)
+                
         # Take a mobile screenshot of services section specifically
-        page.locator('#services').screenshot(path=r"C:\Users\nadief\.gemini\antigravity-ide\brain\b382c9bb-1958-4ac8-88a7-82928080de69\services_mobile.png")
-        print("Mobile screenshot saved to artifacts/services_mobile.png")
-        if not initial_desc.is_visible():
-            print("Error: Initial accordion content is not expanded")
-            sys.exit(1)
-            
-        print("Tapping on Chauffeur services accordion header...")
-        accordion_header_1 = page.locator('.lg\\:hidden').get_by_text('Chauffeur services').first
-        accordion_header_1.click()
-        
-        # Verify first accordion collapses and second expands
-        initial_desc.wait_for(state='hidden', timeout=3000)
-        if initial_desc.is_visible():
-            print("Error: First accordion did not collapse")
-            sys.exit(1)
-            
-        mobile_desc = page.locator('.lg\\:hidden').get_by_text('Experience flawless hospitality').first
-        mobile_desc.wait_for(state='visible', timeout=3000)
-        if mobile_desc.is_visible():
-            print("Success: Mobile accordion click-to-expand works!")
-        else:
-            print("Error: Accordion content did not expand")
-            sys.exit(1)
-
-        print("Tapping on Chauffeur services accordion header again to collapse it...")
-        accordion_header_1.click()
-        mobile_desc.wait_for(state='hidden', timeout=3000)
-        if mobile_desc.is_visible():
-            print("Error: Accordion did not collapse when clicked again")
-            sys.exit(1)
-        print("Success: Mobile accordion click-to-collapse works!")
+        mobile_screenshot_path = r"C:\Users\nadief\.gemini\antigravity-ide\brain\b382c9bb-1958-4ac8-88a7-82928080de69\services_mobile_stack.png"
+        page.locator('#services').screenshot(path=mobile_screenshot_path)
+        print(f"Mobile screenshot saved to {mobile_screenshot_path}")
             
         print("Closing browser...")
         browser.close()
