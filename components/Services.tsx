@@ -41,7 +41,7 @@ const SERVICES_DATA = [
   }
 ];
 
-function SpotlightCard({ service }: { service: typeof SERVICES_DATA[0] }) {
+function SpotlightCard({ service, isLarge = false }: { service: typeof SERVICES_DATA[0], isLarge?: boolean }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -53,7 +53,9 @@ function SpotlightCard({ service }: { service: typeof SERVICES_DATA[0] }) {
 
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-black/40 backdrop-blur-[10px] p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] shadow-2xl shadow-black/80 transition-all duration-300"
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-black/40 backdrop-blur-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] shadow-2xl shadow-black/80 transition-all duration-300 ${
+        isLarge ? 'lg:col-span-2 p-8 lg:p-10' : 'lg:col-span-1 p-8'
+      }`}
       onMouseMove={handleMouseMove}
     >
       <motion.div
@@ -69,10 +71,14 @@ function SpotlightCard({ service }: { service: typeof SERVICES_DATA[0] }) {
         }}
       />
       <div className="relative z-10 flex flex-col h-full gap-4">
-        <h3 className="text-xl md:text-2xl font-display font-medium text-white tracking-tight leading-tight">
+        <h3 className={`font-display font-medium text-white tracking-tight leading-tight ${
+          isLarge ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'
+        }`}>
           {service.title}
         </h3>
-        <p className="text-sm text-zinc-400 leading-relaxed font-sans mt-2">
+        <p className={`leading-relaxed font-sans mt-2 ${
+          isLarge ? 'text-base text-zinc-400' : 'text-sm text-zinc-400'
+        }`}>
           {service.desc}
         </p>
       </div>
@@ -99,10 +105,14 @@ export function Services() {
           </h2>
         </div>
 
-        {/* Layout Grid: 3-column Bento style */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {SERVICES_DATA.map((service) => (
-            <SpotlightCard key={service.id} service={service} />
+        {/* Layout Grid: Asymmetric bento grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+          {SERVICES_DATA.map((service, index) => (
+            <SpotlightCard 
+              key={service.id} 
+              service={service} 
+              isLarge={index === 0} 
+            />
           ))}
         </div>
 

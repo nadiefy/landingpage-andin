@@ -45,12 +45,28 @@ def run():
                 sys.exit(1)
 
         # Verify glassmorphism classes are synced with Navbar
-        first_card = page.locator('#services .grid > div').first
-        class_attr = first_card.get_attribute('class')
-        print(f"Card classes: {class_attr}")
+        cards = page.locator('#services .grid > div')
+        card_count = cards.count()
+        if card_count != 3:
+            print(f"Error: Expected 3 cards in grid, found {card_count}")
+            sys.exit(1)
+            
+        first_card_class = cards.nth(0).get_attribute('class')
+        print(f"First card classes: {first_card_class}")
+        if 'lg:col-span-2' not in first_card_class:
+            print("Error: First card is missing 'lg:col-span-2' class")
+            sys.exit(1)
+            
+        for i in [1, 2]:
+            card_class = cards.nth(i).get_attribute('class')
+            print(f"Card {i+1} classes: {card_class}")
+            if 'lg:col-span-1' not in card_class:
+                print(f"Error: Card {i+1} is missing 'lg:col-span-1' class")
+                sys.exit(1)
+
         required_classes = ["bg-black/40", "backdrop-blur-[10px]", "border-primary/10"]
         for cls in required_classes:
-            if cls not in class_attr:
+            if cls not in first_card_class:
                 print(f"Error: Card is missing glassmorphism class '{cls}'")
                 sys.exit(1)
         
