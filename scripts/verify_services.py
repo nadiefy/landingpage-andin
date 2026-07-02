@@ -37,6 +37,23 @@ def run():
                 print(f"Error: Card with title '{title}' is not visible on desktop")
                 sys.exit(1)
         
+        # Verify no metadata tags are present
+        for tag in ["RATES", "CHAUFFEUR", "SUPPORT", "01 /", "02 /", "03 /"]:
+            tag_loc = page.locator('#services').get_by_text(tag, exact=True).first
+            if tag_loc.is_visible():
+                print(f"Error: Found metadata tag '{tag}' in Services section, expected none")
+                sys.exit(1)
+
+        # Verify glassmorphism classes are synced with Navbar
+        first_card = page.locator('#services .grid > div').first
+        class_attr = first_card.get_attribute('class')
+        print(f"Card classes: {class_attr}")
+        required_classes = ["bg-black/40", "backdrop-blur-[10px]", "border-primary/10"]
+        for cls in required_classes:
+            if cls not in class_attr:
+                print(f"Error: Card is missing glassmorphism class '{cls}'")
+                sys.exit(1)
+        
         # Verify no images or specs tables exist in Services
         img_count = page.locator('#services img').count()
         if img_count > 0:

@@ -51,18 +51,9 @@ function SpotlightCard({ service }: { service: typeof SERVICES_DATA[0] }) {
     mouseY.set(clientY - top);
   }
 
-  const getTag = (id: string) => {
-    switch (id) {
-      case "01": return "RATES";
-      case "02": return "CHAUFFEUR";
-      case "03": return "SUPPORT";
-      default: return "";
-    }
-  };
-
   return (
     <div
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/40 backdrop-blur-xl p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] shadow-2xl shadow-black/80 transition-all duration-300"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-black/40 backdrop-blur-[10px] p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] shadow-2xl shadow-black/80 transition-all duration-300"
       onMouseMove={handleMouseMove}
     >
       <motion.div
@@ -78,9 +69,6 @@ function SpotlightCard({ service }: { service: typeof SERVICES_DATA[0] }) {
         }}
       />
       <div className="relative z-10 flex flex-col h-full gap-4">
-        <span className="text-[10px] font-semibold text-[#ec3237] uppercase tracking-widest block font-sans">
-          {service.id} / {getTag(service.id)}
-        </span>
         <h3 className="text-xl md:text-2xl font-display font-medium text-white tracking-tight leading-tight">
           {service.title}
         </h3>
