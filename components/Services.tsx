@@ -91,7 +91,7 @@ export function Services() {
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
             Services built for <span className="relative inline-block"><motion.span
                 key={animationKey}
-                className="absolute inset-0 bg-[#ec3237] origin-left"
+                className="absolute inset-x-0 -top-[0.08em] -bottom-[0.08em] bg-[#ec3237] origin-left"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
