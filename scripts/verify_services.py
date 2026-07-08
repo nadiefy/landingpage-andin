@@ -24,10 +24,27 @@ def run():
             print("Error: Services section is not visible")
             sys.exit(1)
             
-        # 2. Test desktop view
+        # 2. Test desktop layout (3 columns)
         print("Running desktop tests...")
-        headings = page.locator('#services h2')
-        print(f"Heading text: {headings.inner_text()}")
+        headings = page.locator('#services h2').first
+        print(f"Raw Heading text: {repr(headings.inner_text())}")
+        heading_text = " ".join(headings.inner_text().split())
+        print(f"Heading text: {heading_text}")
+        if "Services built for every journey" not in heading_text:
+            print(f"Error: Heading text is unexpected: '{heading_text}'")
+            sys.exit(1)
+            
+        # Verify red highlight container is present
+        spans = page.locator('#services h2 span')
+        found_highlight = False
+        for i in range(spans.count()):
+            cls = spans.nth(i).get_attribute('class')
+            if cls and 'bg-[#ec3237]' in cls:
+                found_highlight = True
+                break
+        if not found_highlight:
+            print("Error: Red highlight animation span with class bg-[#ec3237] is missing")
+            sys.exit(1)
         
         # Verify all 3 cards are visible on desktop
         card_titles = ["Flexible scheduling", "Chauffeur services", "Continuous support"]

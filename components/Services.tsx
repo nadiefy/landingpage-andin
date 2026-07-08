@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { motion } from 'motion/react';
 
 const SERVICES_DATA = [
   {
@@ -58,8 +59,13 @@ export function Services() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
-            Services built for<br />
-            <span className="text-zinc-500">every journey</span>
+            Services built for <span className="relative inline-block"><motion.span
+                className="absolute inset-0 bg-[#ec3237] rounded-sm origin-left"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              /><span className="relative z-10">every journey</span></span>
           </h2>
         </div>
 
