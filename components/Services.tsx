@@ -1,84 +1,42 @@
 'use client';
 
-import { motion, useMotionValue, useMotionTemplate } from 'motion/react';
+import Image from 'next/image';
 
 const SERVICES_DATA = [
   {
-    id: "01",
     title: "Flexible scheduling",
-    subtitle: "Flexible daily or monthly rates",
     desc: "Rates by the day, week, or month — aligned to your exact itinerary. Keep full control of your transport logistics with options tailored for executive transfers, production shoots, and luxury tour schedules.",
-    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1000&auto=format&fit=crop",
-    specs: [
-      { label: "Minimum Rental", value: "1 Day" },
-      { label: "Pricing Model", value: "Daily / Weekly / Monthly" },
-      { label: "Vehicle Control", value: "Self-Drive or Chauffeur" }
-    ]
+    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    id: "02",
     title: "Chauffeur services",
-    subtitle: "Professional chauffeurs on call",
     desc: "Professional, vetted drivers and direct airport transfers, dispatched on request. Experience flawless hospitality, absolute discretion, and route optimization from our English-speaking, fully uniformed chauffeurs.",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop",
-    specs: [
-      { label: "Driver Level", value: "Certified Professional" },
-      { label: "Languages", value: "English & Indonesian" },
-      { label: "Service Area", value: "National Coverage" }
-    ]
+    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    id: "03",
     title: "Continuous support",
-    subtitle: "Roadside help around the clock",
     desc: "Roadside response and concierge operations, active at any hour. A dedicated dispatch team is constantly monitoring our fleet to handle vehicle swaps, route alterations, or roadside support instantly.",
-    image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=1000&auto=format&fit=crop",
-    specs: [
-      { label: "Response Time", value: "< 30 Minutes" },
-      { label: "Availability", value: "24 Hours / 7 Days" },
-      { label: "Support Channels", value: "Direct Phone & WhatsApp" }
-    ]
+    image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=1000&auto=format&fit=crop"
   }
 ];
 
-function SpotlightCard({ service, isLarge = false }: { service: typeof SERVICES_DATA[0], isLarge?: boolean }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
+function ImageCard({ service }: { service: typeof SERVICES_DATA[0] }) {
   return (
-    <div
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-primary/10 bg-black/40 backdrop-blur-[10px] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] shadow-2xl shadow-black/80 transition-all duration-300 ${
-        isLarge ? 'lg:col-span-2 p-8 lg:p-10' : 'lg:col-span-1 p-8'
-      }`}
-      onMouseMove={handleMouseMove}
-    >
-      <motion.div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100 hidden sm:block motion-reduce:hidden"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              350px circle at ${mouseX}px ${mouseY}px,
-              rgba(255,255,255,0.06),
-              transparent 80%
-            )
-          `,
-        }}
+    <div className="relative overflow-hidden rounded-2xl aspect-[3/4] group">
+      <Image
+        src={service.image}
+        alt={service.title}
+        fill
+        unoptimized={false}
+        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, 33vw"
       />
-      <div className="relative z-10 flex flex-col h-full gap-4">
-        <h3 className={`font-display font-medium text-white tracking-tight leading-tight ${
-          isLarge ? 'text-2xl md:text-3xl' : 'text-xl md:text-2xl'
-        }`}>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+      <div className="absolute bottom-0 left-0 p-6 flex flex-col gap-2 z-10">
+        <h3 className="text-xl md:text-2xl font-display font-medium text-white tracking-tight leading-tight">
           {service.title}
         </h3>
-        <p className={`leading-relaxed font-sans mt-2 ${
-          isLarge ? 'text-base text-zinc-400' : 'text-sm text-zinc-400'
-        }`}>
+        <p className="text-sm text-white/70 leading-relaxed mt-2">
           {service.desc}
         </p>
       </div>
@@ -105,14 +63,10 @@ export function Services() {
           </h2>
         </div>
 
-        {/* Layout Grid: Asymmetric bento grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-          {SERVICES_DATA.map((service, index) => (
-            <SpotlightCard 
-              key={service.id} 
-              service={service} 
-              isLarge={index === 0} 
-            />
+        {/* Layout Grid: 3-column Image Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {SERVICES_DATA.map((service) => (
+            <ImageCard key={service.title} service={service} />
           ))}
         </div>
 

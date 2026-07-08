@@ -44,36 +44,25 @@ def run():
                 print(f"Error: Found metadata tag '{tag}' in Services section, expected none")
                 sys.exit(1)
 
-        # Verify glassmorphism classes are synced with Navbar
+        # Verify 3 cards in grid
         cards = page.locator('#services .grid > div')
         card_count = cards.count()
         if card_count != 3:
             print(f"Error: Expected 3 cards in grid, found {card_count}")
             sys.exit(1)
             
-        first_card_class = cards.nth(0).get_attribute('class')
-        print(f"First card classes: {first_card_class}")
-        if 'lg:col-span-2' not in first_card_class:
-            print("Error: First card is missing 'lg:col-span-2' class")
-            sys.exit(1)
-            
-        for i in [1, 2]:
+        # Verify image cards have aspect-[3/4] and group classes
+        for i in range(3):
             card_class = cards.nth(i).get_attribute('class')
             print(f"Card {i+1} classes: {card_class}")
-            if 'lg:col-span-1' not in card_class:
-                print(f"Error: Card {i+1} is missing 'lg:col-span-1' class")
-                sys.exit(1)
-
-        required_classes = ["bg-black/40", "backdrop-blur-[10px]", "border-primary/10"]
-        for cls in required_classes:
-            if cls not in first_card_class:
-                print(f"Error: Card is missing glassmorphism class '{cls}'")
+            if 'aspect-[3/4]' not in card_class or 'group' not in card_class:
+                print(f"Error: Card {i+1} is missing aspect-[3/4] or group classes")
                 sys.exit(1)
         
-        # Verify no images or specs tables exist in Services
+        # Verify exactly 3 images exist in Services (one for each card background)
         img_count = page.locator('#services img').count()
-        if img_count > 0:
-            print(f"Error: Found {img_count} images in Services section, expected 0")
+        if img_count != 3:
+            print(f"Error: Found {img_count} images in Services section, expected exactly 3")
             sys.exit(1)
             
         # Take a desktop screenshot
