@@ -84,7 +84,7 @@ def run():
             
         # Take a desktop screenshot
         screenshot_path = r"C:\Users\nadief\.gemini\antigravity-ide\brain\b382c9bb-1958-4ac8-88a7-82928080de69\services_desktop_grid.png"
-        page.screenshot(path=screenshot_path, full_page=False)
+        page.locator('#services').screenshot(path=screenshot_path)
         print(f"Desktop screenshot saved to {screenshot_path}")
         
         # 3. Test mobile layout (stacked view)
