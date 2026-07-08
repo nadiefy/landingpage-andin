@@ -31,8 +31,9 @@ Apply the following frontend design skills in concert to establish a premium aes
    b. Call `stitch:list_projects` to check if a project named "landingpage-andin - <topic-name>" exists. If not, call `stitch:create_project` with title "landingpage-andin - <topic-name>". Retrieve the `projectId`.
    c. Convert the drafted design spec file's contents into a base64-encoded string.
    d. Call `stitch:upload_design_md` with the `projectId` and the base64 string. Retrieve the screen instance information (`id` and `sourceScreen`) from the response.
-   e. Call `stitch:create_design_system_from_design_md` using the `projectId` and the returned `selectedScreenInstance`.
-   f. Proactively call `stitch:list_screens` or `stitch:generate_variants` to sync and review layouts in the mockup workspace.
+   e. Call `stitch:create_design_system_from_design_md` using the `projectId` and the returned `selectedScreenInstance`. Retrieve the design system ID from the response or via `stitch:list_design_systems`.
+   f. Generate the initial mockup screen by calling `stitch:generate_screen_from_text` with the `projectId`, `designSystem` ID, and a prompt (e.g., "Create the <topic-name> screen layout based on DESIGN.md").
+   g. Proactively call `stitch:list_screens` or `stitch:generate_variants` to sync and review layouts in the mockup workspace.
    *(Note: If you encounter parameter or API issues with Stitch, read the schema JSON files in `C:\Users\nadief\.gemini\antigravity\mcp\stitch\` to self-correct).*
 
 ### C. If the topic involves Non-UI/UX Features (APIs, routing, database, logic):
