@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 
@@ -46,6 +47,35 @@ function ImageCard({ service }: { service: typeof SERVICES_DATA[0] }) {
 }
 
 export function Services() {
+  const [animationKey, setAnimationKey] = useState(0);
+
+  useEffect(() => {
+    const handleReplay = () => {
+      setAnimationKey(prev => prev + 1);
+    };
+
+    const handleLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (anchor && anchor.getAttribute('href') === '#services') {
+        handleReplay();
+      }
+    };
+
+    const handleHashChange = () => {
+      if (window.location.hash === '#services') {
+        handleReplay();
+      }
+    };
+
+    document.addEventListener('click', handleLinkClick);
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      document.removeEventListener('click', handleLinkClick);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   return (
     <section className="relative w-full py-24 lg:py-32 overflow-hidden bg-black text-white scroll-mt-20 lg:scroll-mt-0" id="services">
       <div className="relative z-10 max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
@@ -60,11 +90,12 @@ export function Services() {
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
             Services built for <span className="relative inline-block"><motion.span
-                className="absolute inset-0 bg-[#ec3237] rounded-sm origin-left"
+                key={animationKey}
+                className="absolute inset-0 bg-[#ec3237] origin-left"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
               /><span className="relative z-10">every journey</span></span>
           </h2>
         </div>
