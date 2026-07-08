@@ -6,17 +6,17 @@ const SERVICES_DATA = [
   {
     title: "Flexible scheduling",
     desc: "Rates by the day, week, or month — aligned to your exact itinerary. Keep full control of your transport logistics with options tailored for executive transfers, production shoots, and luxury tour schedules.",
-    image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1000&auto=format&fit=crop"
+    image: "/assets/pic/services-section/scheduling.jpg"
   },
   {
     title: "Chauffeur services",
     desc: "Professional, vetted drivers and direct airport transfers, dispatched on request. Experience flawless hospitality, absolute discretion, and route optimization from our English-speaking, fully uniformed chauffeurs.",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop"
+    image: "/assets/pic/services-section/chauffeur.jpg"
   },
   {
     title: "Continuous support",
     desc: "Roadside response and concierge operations, active at any hour. A dedicated dispatch team is constantly monitoring our fleet to handle vehicle swaps, route alterations, or roadside support instantly.",
-    image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?q=80&w=1000&auto=format&fit=crop"
+    image: "/assets/pic/services-section/support.jpg"
   }
 ];
 
