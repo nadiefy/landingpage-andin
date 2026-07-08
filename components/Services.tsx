@@ -95,7 +95,7 @@ export function Services() {
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
               /><span className="relative z-10">every journey</span></span>
           </h2>
         </div>
