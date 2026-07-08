@@ -89,14 +89,17 @@ export function Services() {
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
-            Services built for <span className="relative inline-block"><motion.span
+            <span className="relative inline-block">
+              <motion.span
                 key={animationKey}
-                className="absolute inset-x-0 -top-[0.21em] -bottom-[0.21em] bg-[#ec3237] origin-left"
+                className="absolute inset-x-0 -top-[0.1em] -bottom-[0.1em] bg-[#ec3237] origin-left"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-              /><span className="relative z-10">every journey</span></span>
+              />
+              <span className="relative z-10">Services built for every journey</span>
+            </span>
           </h2>
         </div>
 
