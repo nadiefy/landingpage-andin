@@ -81,7 +81,13 @@ export function Services() {
       <div className="relative z-10 max-w-7xl mx-auto px-7 md:px-12 lg:px-20">
         
         {/* Section Header */}
-        <div className="mb-16 lg:mb-24">
+        <motion.div
+          className="mb-16 lg:mb-24"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-6 bg-white/40"></div>
             <span className="text-sm font-medium uppercase tracking-widest text-zinc-400 font-sans">
@@ -98,7 +104,7 @@ export function Services() {
                 transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
               /><span className="relative z-10">every journey</span></span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Layout Grid: 3-column Image Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
