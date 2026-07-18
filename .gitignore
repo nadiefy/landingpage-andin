@@ -2,3 +2,20 @@ node_modules
 .next
 artifacts/
 .superpowers/
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
+
+# Claude configurations (except brainstorming.md)
+.claude/*
+!.claude/rules/
+.claude/rules/*
+!.claude/rules/brainstorming.md
+
+# Agent-internal planning/spec documents
+docs/superpowers/
+docs/ways-of-work/
+
+# Local environments and Vercel configs
+.env*
+.vercel/

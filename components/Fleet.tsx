@@ -87,7 +87,7 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
         </div>
       </div>
       
-      <div className="mt-4 min-h-[160px]">
+      <div className="mt-6 min-h-[160px]">
         <h3 className="text-xl sm:text-2xl font-display font-medium text-white tracking-tighter leading-none">{car.name}</h3>
         
         <p className="mt-1 text-sm text-zinc-400">
@@ -179,7 +179,7 @@ export function Fleet() {
                 className="absolute inset-x-0 -top-[0.15em] -bottom-[0.15em] bg-[#ec3237] origin-left"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, amount: 0.5 }}
+                viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
               />
               <span className="relative z-10">fleet</span>
