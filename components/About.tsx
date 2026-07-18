@@ -67,10 +67,10 @@ export function About() {
             className="space-y-8 text-lg md:text-xl text-primary/70 leading-relaxed"
           >
             <p>
-              We believe that renting a car shouldn't be a hassle. Our premium fleet is meticulously curated to offer vehicles that provide the ultimate comfort, performance, and style for any occasion.
+              We believe that renting a car shouldn&apos;t be a hassle. Our premium fleet is meticulously curated to offer vehicles that provide the ultimate comfort, performance, and style for any occasion.
             </p>
             <p>
-              From seamless online booking to white-glove delivery service, every detail is crafted to elevate your journey. Whether you're navigating city streets for a business meeting or embarking on a cross-country road trip, we deliver an uncompromising experience.
+              From seamless online booking to white-glove delivery service, every detail is crafted to elevate your journey. Whether you&apos;re navigating city streets for a business meeting or embarking on a cross-country road trip, we deliver an uncompromising experience.
             </p>
           </motion.div>
         </div>

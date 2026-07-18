@@ -1,15 +1,19 @@
-# Andin — Premium Car Rental
+<div align="center">
+  <h1>Andin — Premium Car Rental</h1>
+  <p><strong>Luxury transport, effortless booking.</strong></p>
 
-**Luxury transport, effortless booking.**
+  <p>
+    <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js&logoColor=white" alt="Next.js" /></a>
+    <a href="https://react.dev"><img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" /></a>
+    <a href="https://tailwindcss.com"><img src="https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" /></a>
+    <a href="https://typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+    <a href="#license"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" /></a>
+  </p>
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js&logoColor=white)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://typescriptlang.org)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](#license)
-
-A dark, immersive landing page for a premium car rental service — built for Andin. Scroll-driven parallax, cinematic hero, and buttery animations powered by Framer Motion.
-
+  <p>
+    A dark, immersive landing page for a premium car rental service — built for Andin.<br />
+    Scroll-driven parallax, cinematic hero, and buttery animations powered by Framer Motion.
+  </p>
 </div>
 
 ---
@@ -28,7 +32,7 @@ A dark, immersive landing page for a premium car rental service — built for An
 
 | Layer | Tech |
 |-------|------|
-| Framework | Next.js 15 (App Router, standalone output) |
+| Framework | Next.js 16 (App Router, Turbopack, standalone output) |
 | UI | React 19, Tailwind CSS 4 |
 | Animation | Framer Motion (`motion` v12) |
 | Icons | Phosphor Icons, Lucide |
@@ -37,7 +41,7 @@ A dark, immersive landing page for a premium car rental service — built for An
 
 ## Getting Started
 
-**Prerequisites:** Node.js 18+
+**Prerequisites:** Node.js 20.9+
 
 ```bash
 # 1. Clone
