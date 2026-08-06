@@ -64,15 +64,15 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
   };
 
   return (
-    <div className="relative flex flex-col w-[78vw] sm:w-[360px] shrink-0 snap-start">
-      <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[28px] bg-[#1d1d1f] group/image">
+    <div className="relative flex flex-col w-[78vw] sm:w-[380px] shrink-0">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[28px] bg-[#1d1d1f] group/image">
         <Image
           src={car.images[currentImage]}
           alt={car.name}
           fill
           loading="lazy"
           className="object-cover"
-          sizes="(max-width: 640px) 78vw, 360px"
+          sizes="(max-width: 640px) 78vw, 380px"
         />
         
         <div className="absolute inset-y-0 left-2 right-2 flex items-center justify-between opacity-0 group-hover/image:opacity-100 transition-opacity">
@@ -87,14 +87,14 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
         </div>
       </div>
       
-      <div className="mt-6 min-h-[160px]">
+      <div className="mt-8 min-h-[160px]">
         <h3 className="text-xl sm:text-2xl font-display font-medium text-white tracking-tighter leading-none">{car.name}</h3>
         
-        <p className="mt-1 text-sm text-zinc-400">
+        <p className="mt-2 text-sm text-zinc-400">
           {car.category} · {car.seats} Seats
         </p>
 
-        <div className="mt-3 flex flex-col gap-2">
+        <div className="mt-4 flex flex-col gap-3">
           {car.amenities.map((amenity, idx) => (
             <div key={idx} className="flex items-start gap-2 text-sm text-zinc-400">
               <CheckCircle className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" aria-hidden="true" />
@@ -109,7 +109,7 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full py-3 px-4 bg-white text-black text-sm font-semibold hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 group/btn rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+          className="w-full py-3 px-4 bg-white text-black text-sm font-semibold hover:bg-zinc-200 active:scale-[0.97] transition-colors transition-transform duration-150 flex items-center justify-center gap-2 group/btn rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           aria-label={`Reserve ${car.name} via WhatsApp`}
         >
           <WhatsappLogo className="w-5 h-5 group-hover/btn:scale-110 transition-transform" weight="fill" />
@@ -165,6 +165,7 @@ export function Fleet() {
 
   return (
     <section className="w-full bg-black py-24 lg:py-32 overflow-hidden relative scroll-mt-20 lg:scroll-mt-0" id="fleet">
+      {/* Header Container */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div>
           <div className="flex items-center gap-4 mb-6">
@@ -186,8 +187,8 @@ export function Fleet() {
             </span>
           </h2>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           className="hidden md:flex gap-2"
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -203,6 +204,7 @@ export function Fleet() {
         </motion.div>
       </div>
 
+      {/* Carousel Container sharing the exact same max-w-7xl mx-auto px-* wrapper */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -210,17 +212,18 @@ export function Fleet() {
         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="w-full"
       >
-        <div 
-          ref={containerRef}
-          className="flex gap-5 overflow-x-auto snap-x snap-mandatory px-6 md:px-12 lg:px-20 xl:px-[calc((100vw-1280px)/2+5rem)] pb-10 [&::-webkit-scrollbar]:hidden touch-manipulation overscroll-x-contain"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {fleet.map((car) => (
-            <CarCard key={car.id} car={car} />
-          ))}
-          
-          {/* Spacer to allow the last card to scroll fully into view */}
-          <div className="w-[1px] shrink-0"></div>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+          <div
+            ref={containerRef}
+            className="flex gap-5 overflow-x-auto pb-10 [&::-webkit-scrollbar]:hidden touch-manipulation overscroll-x-contain"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {fleet.map((car) => (
+              <CarCard key={car.id} car={car} />
+            ))}
+
+            <div className="shrink-0 min-w-[1px] w-[max(0px,calc(100vw-5rem))]"></div>
+          </div>
         </div>
       </motion.div>
     </section>

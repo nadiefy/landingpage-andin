@@ -34,7 +34,7 @@ export function About() {
           </h2>
         </motion.div>
 
-        <div ref={containerRef} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div ref={containerRef} className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: Images */}
           <motion.div 
             className="grid grid-cols-2 gap-6 items-center"
@@ -45,15 +45,15 @@ export function About() {
           >
             <motion.div style={{ y: y1 }} className="space-y-6">
               <div className="relative h-72 rounded-2xl overflow-hidden bg-white/5 border border-white/10">
-                <Image src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=400&h=800" alt="Premium sports car" fill className="object-cover opacity-80 mix-blend-luminosity" referrerPolicy="no-referrer" />
+                <Image src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=400&h=800" alt="Premium sports car" fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover opacity-80 mix-blend-luminosity" referrerPolicy="no-referrer" />
               </div>
             </motion.div>
             <motion.div style={{ y: y2 }} className="space-y-6">
               <div className="relative h-56 rounded-2xl overflow-hidden bg-white/5 border border-white/10">
-                <Image src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&q=80&w=400&h=800" alt="Luxury car interior" fill className="object-cover opacity-80 mix-blend-luminosity" referrerPolicy="no-referrer" />
+                <Image src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&q=80&w=400&h=800" alt="Luxury car interior" fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover opacity-80 mix-blend-luminosity" referrerPolicy="no-referrer" />
               </div>
               <div className="relative h-64 rounded-2xl overflow-hidden bg-white/5 border border-white/10">
-                <Image src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400&h=800" alt="Sleek car exterior" fill className="object-cover opacity-80 mix-blend-luminosity" referrerPolicy="no-referrer" />
+                <Image src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=400&h=800" alt="Sleek car exterior" fill sizes="(max-width: 1024px) 50vw, 25vw" className="object-cover opacity-80 mix-blend-luminosity" referrerPolicy="no-referrer" />
               </div>
             </motion.div>
           </motion.div>
