@@ -41,6 +41,30 @@ const fleet = [
       "/assets/pic/fleet-section/innova-1.jpg",
       "/assets/pic/fleet-section/innova-2.jpg"
     ],
+  },
+  {
+    id: "fortuner-2025",
+    name: "Toyota Fortuner 2025",
+    category: "EXECUTIVE SUV",
+    seats: 7,
+    luggage: "4 large suitcases",
+    amenities: ["4x4 capability", "JBL sound system", "Ventilated seats"],
+    images: [
+      "/assets/pic/fleet-section/fortuner-1.jpg",
+      "/assets/pic/fleet-section/fortuner-2.JPG"
+    ],
+  },
+  {
+    id: "sprinter-executive-2025",
+    name: "Mercedes Benz Sprinter 2025",
+    category: "LUXURY SHUTTLE",
+    seats: 7,
+    luggage: "5 large suitcases",
+    amenities: ["Captain chair leather seats", "Rear climate control", "USB-C ports"],
+    images: [
+      "/assets/pic/fleet-section/sprinter-1.JPG",
+      "/assets/pic/fleet-section/sprinter-2.JPG"
+    ],
   }
 ];
 
