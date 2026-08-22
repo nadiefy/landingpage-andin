@@ -19,3 +19,9 @@ docs/ways-of-work/
 # Local environments and Vercel configs
 .env*
 .vercel/
+
+# Graphify output
+graphify-out/
+
+# Agent documentation
+CLAUDE.md

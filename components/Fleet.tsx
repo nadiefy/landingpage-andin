@@ -188,7 +188,7 @@ export function Fleet() {
   };
 
   return (
-    <section className="w-full bg-black py-24 lg:py-32 overflow-hidden relative scroll-mt-20 lg:scroll-mt-0" id="fleet">
+    <section className="w-full bg-black py-24 lg:py-32 overflow-x-clip relative scroll-mt-20 lg:scroll-mt-0" id="fleet">
       {/* Header Container */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 mb-12 flex flex-col md:flex-row md:items-end justify-between gap-8">
         <div>
@@ -236,17 +236,20 @@ export function Fleet() {
         transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="w-full"
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-          <div
-            ref={containerRef}
-            className="flex gap-5 overflow-x-auto pb-10 [&::-webkit-scrollbar]:hidden touch-manipulation overscroll-x-contain"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {fleet.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
+        <div className="relative w-full">
+          <div className="w-[100vw] relative left-[50%] -ml-[50vw]">
+            <div
+              ref={containerRef}
+              className="flex gap-5 overflow-x-auto pb-10 [&::-webkit-scrollbar]:hidden touch-manipulation overscroll-x-contain"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              <div className="shrink-0 w-6 md:w-12 lg:w-20"></div>
+              {fleet.map((car) => (
+                <CarCard key={car.id} car={car} />
+              ))}
 
-            <div className="shrink-0 min-w-[1px] w-[max(0px,calc(100vw-5rem))]"></div>
+              <div className="shrink-0 min-w-[1px] w-[max(0px,calc(100vw-5rem))]"></div>
+            </div>
           </div>
         </div>
       </motion.div>
