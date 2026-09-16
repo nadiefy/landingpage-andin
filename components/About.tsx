@@ -1,11 +1,40 @@
 'use client';
 
+import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
-import { useRef } from 'react';
 
 export function About() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [animationKey, setAnimationKey] = useState(0);
+
+  useEffect(() => {
+    const handleReplay = () => {
+      setAnimationKey(prev => prev + 1);
+    };
+
+    const handleLinkClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+      if (anchor && anchor.getAttribute('href') === '#about') {
+        handleReplay();
+      }
+    };
+
+    const handleHashChange = () => {
+      if (window.location.hash === '#about') {
+        handleReplay();
+      }
+    };
+
+    document.addEventListener('click', handleLinkClick);
+    window.addEventListener('hashchange', handleHashChange);
+    return () => {
+      document.removeEventListener('click', handleLinkClick);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -23,14 +52,24 @@ export function About() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-6 bg-primary/40"></div>
-            <span className="text-sm font-medium uppercase tracking-widest text-primary/80">Why Choose Us</span>
+            <span className="text-sm font-medium uppercase tracking-widest text-primary/80">Tentang Kami</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium leading-tight mb-16 max-w-4xl">
-            Why You Should Rent Your<br />
-            <span className="text-primary/50">Next Vehicle With Us</span>
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-tight mb-16 max-w-4xl text-white">
+            Kenyamanan berkendara untuk{' '}
+            <span className="relative inline-block">
+              <motion.span
+                key={animationKey}
+                className="absolute inset-x-0 -top-[0.15em] -bottom-[0.15em] bg-[#ec3237] origin-left"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: false, amount: 0.5 }}
+                transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+              />
+              <span className="relative z-10">setiap agenda Anda</span>
+            </span>
           </h2>
         </motion.div>
 
@@ -64,13 +103,13 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-8 text-lg md:text-xl text-primary/70 leading-relaxed"
+            className="space-y-8 text-base md:text-lg text-primary/70 leading-relaxed max-w-prose"
           >
             <p>
-              We believe that renting a car shouldn&apos;t be a hassle. Our premium fleet is meticulously curated to offer vehicles that provide the ultimate comfort, performance, and style for any occasion.
+              Kami memastikan proses sewa kendaraan berjalan mudah dan tepat waktu. Seluruh armada kami rawat secara berkala demi menjaga kenyamanan, performa, serta kebersihan kabin.
             </p>
             <p>
-              From seamless online booking to white-glove delivery service, every detail is crafted to elevate your journey. Whether you&apos;re navigating city streets for a business meeting or embarking on a cross-country road trip, we deliver an uncompromising experience.
+              Mulai dari pemesanan via WhatsApp hingga pengantaran unit ke lokasi Anda, tim kami menangani setiap detail dengan cermat untuk kelancaran perjalanan Anda.
             </p>
           </motion.div>
         </div>
