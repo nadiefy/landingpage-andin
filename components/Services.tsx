@@ -6,18 +6,18 @@ import { motion } from 'motion/react';
 
 const SERVICES_DATA = [
   {
-    title: "Flexible scheduling",
-    desc: "Rates by the day, week, or month — aligned to your exact itinerary. Keep full control of your transport logistics with options tailored for executive transfers, production shoots, and luxury tour schedules.",
+    title: "Jadwal Fleksibel",
+    desc: "Sewa harian, mingguan, atau bulanan sesuai rencana perjalanan Anda. Atur mobilitas eksekutif, kebutuhan produksi, hingga wisata premium dengan kendali penuh.",
     image: "/assets/pic/services-section/scheduling.jpg"
   },
   {
-    title: "Chauffeur services",
-    desc: "Professional, vetted drivers and direct airport transfers, dispatched on request. Experience flawless hospitality, absolute discretion, and route optimization from our English-speaking, fully uniformed chauffeurs.",
+    title: "Layanan Pengemudi",
+    desc: "Pengemudi berseragam dan berpengalaman siap melayani rute kota hingga antar-jemput bandara. Nikmati perjalanan tepat waktu dengan kenyamanan serta privasi terjaga.",
     image: "/assets/pic/services-section/chauffeur.jpg"
   },
   {
-    title: "Continuous support",
-    desc: "Roadside response and concierge operations, active at any hour. A dedicated dispatch team is constantly monitoring our fleet to handle vehicle swaps, route alterations, or roadside support instantly.",
+    title: "Dukungan Penuh",
+    desc: "Tim operasional kami siaga 24 jam untuk bantuan darurat jalan raya, penyesuaian rute perjalanan, hingga penggantian unit kendaraan secara cepat.",
     image: "/assets/pic/services-section/support.jpg"
   }
 ];
@@ -38,7 +38,7 @@ function ImageCard({ service }: { service: typeof SERVICES_DATA[0] }) {
         <h3 className="text-xl md:text-2xl font-display font-medium text-white tracking-tight leading-tight">
           {service.title}
         </h3>
-        <p className="text-sm text-white/70 leading-relaxed mt-2">
+        <p className="text-sm text-white/70 leading-relaxed mt-2 text-pretty">
           {service.desc}
         </p>
       </div>
@@ -85,18 +85,18 @@ export function Services() {
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-6 bg-white/40"></div>
             <span className="text-sm font-medium uppercase tracking-widest text-zinc-400 font-sans">
-              Our Capabilities
+              Layanan Unggulan
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
-            Services built for <span className="relative inline-block"><motion.span
+            Layanan untuk <span className="relative inline-block"><motion.span
                 key={animationKey}
                 className="absolute inset-x-0 -top-[0.15em] -bottom-[0.15em] bg-[#ec3237] origin-left"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-              /><span className="relative z-10">every journey</span></span>
+              /><span className="relative z-10">setiap perjalanan</span></span>
           </h2>
         </div>
 

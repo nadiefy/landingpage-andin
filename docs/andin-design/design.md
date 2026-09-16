@@ -1,4 +1,4 @@
-﻿# Design Document: Andin Transport Landing Page
+# Design Document: Andin Transport Landing Page
 
 **Project:** Premium Car Rental Landing Page  
 **Brand:** Andin Transport  
@@ -52,7 +52,7 @@ landingpage-andin/
 ├── components/
 │   ├── Navbar.tsx         # Fixed navigation with mobile menu
 │   ├── Hero.tsx           # Full-height video background hero
-│   ├── Services.tsx       # Service features with video background
+│   ├── Services.tsx       # Service features with responsive image cards (video background deferred)
 │   ├── Fleet.tsx          # Interactive car carousel with WhatsApp booking
 │   ├── About.tsx          # Brand story with parallax images
 │   ├── CTA.tsx            # Contact section with embedded Google Map
@@ -135,19 +135,24 @@ landingpage-andin/
 ### 3. Services
 **File:** `components/Services.tsx`
 
-**Purpose:** Highlight key rental services with feature cards.
+**Purpose:** Highlight key rental capabilities with high-impact visual image cards.
 
-**Features:**
-- Video background with dark overlay (sample video from Google Storage)
-- Three feature cards with icons:
-  1. Flexible scheduling (CalendarBlank icon)
-  2. Chauffeur services (UserCircleCheck icon)
-  3. Continuous support (Headset icon)
-- Parallax effect on video background
+**Features & Layout:**
+- **Three-Column Image-Card Grid:** Responsive layout with a single-column stack on mobile and a three-column grid on tablet/desktop (`grid grid-cols-1 md:grid-cols-3 gap-6`).
+- **Image Cards:** High-resolution photography rendered with Next.js `<Image />` (`object-cover`, `sizes="(max-width: 768px) 100vw, 33vw"`), 3:4 aspect ratio (`aspect-[3/4]`), and rounded corners (`rounded-2xl`).
+- **Dark Gradient Overlays:** Multi-stop vertical gradient (`bg-gradient-to-t from-black/90 via-black/40 to-transparent`) overlaying each card, ensuring strong contrast and readability for title and descriptive text.
+- **Hover Scale Interaction:** Smooth image zoom (`group-hover:scale-105 transition-transform duration-500 ease-out`) on card hover.
+- **Service Offerings:**
+  1. **Flexible scheduling:** Day, week, or month rates aligned to custom itineraries (`/assets/pic/services-section/scheduling.jpg`).
+  2. **Chauffeur services:** Professional, vetted English-speaking chauffeurs and airport transfers (`/assets/pic/services-section/chauffeur.jpg`).
+  3. **Continuous support:** 24/7 roadside response and dedicated concierge dispatch (`/assets/pic/services-section/support.jpg`).
 
-**Layout:**
-- Two-column grid on desktop (header left, cards right)
-- Stacked on mobile
+**Motion & Interactivity:**
+- **Animated Heading Highlight:** Section heading "Services built for every journey" features an accent red highlight bar (`bg-[#ec3237]`) underneath "every journey" that animates in with Motion (`scaleX: 0` to `scaleX: 1`, duration: 2.5s, ease: `[0.16, 1, 0.3, 1]`) when scrolled into view (`whileInView`, `viewport={{ once: false, amount: 0.5 }}`).
+- **Heading Highlight Replay:** Listens for clicks on anchor links pointing to `#services` and `hashchange` events on `#services`, replaying the heading highlight animation upon each trigger.
+
+**Deferred Concepts:**
+- **Video Background & Parallax:** The earlier concept of a video background (sample video from Google Storage) and parallax scroll effect across a two-column layout is deferred and is not part of the current shipped implementation.
 
 ### 4. Fleet
 **File:** `components/Fleet.tsx`
@@ -253,7 +258,7 @@ landingpage-andin/
 ### Videos
 - Local video for hero (reduced network latency)
 - `autoPlay`, `loop`, `muted`, `playsInline` attributes
-- Sample video for services (placeholder)
+- Sample video for services (placeholder - deferred concept, not present in shipped component)
 
 ### Bundle Size
 - Server Components by default (reduced client JS)
