@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight, MapPin, Phone, Mail } from 'lucide-react';
+import { WhatsappLogo } from '@phosphor-icons/react';
 import { useRef } from 'react';
 
 export function CTA() {
@@ -45,10 +46,10 @@ export function CTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-4 mb-8"
+              className="flex items-center gap-4 mb-6"
             >
               <div className="h-px w-6 bg-primary/40"></div>
-              <span className="text-sm font-medium uppercase tracking-widest text-primary/80">Review Us</span>
+              <span className="text-sm font-medium uppercase tracking-widest text-primary/80">Hubungi Kami</span>
             </motion.div>
 
             <motion.h2
@@ -56,10 +57,9 @@ export function CTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl md:text-5xl lg:text-6xl font-display font-medium leading-[1.1] mb-6"
+              className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-tight text-white mb-6"
             >
-              Share your experience<br />
-              <span className="text-primary/50">with us</span>
+              Siap melayani perjalanan Anda
             </motion.h2>
 
             <motion.p
@@ -67,9 +67,9 @@ export function CTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-lg md:text-xl text-primary/60 mb-10 max-w-md"
+              className="text-base md:text-lg text-primary/70 leading-relaxed mb-10 max-w-md"
             >
-              Your feedback drives our commitment to excellence. Leave a review on Google to let us know about your journey and help others discover our premium service.
+              Hubungi kami untuk reservasi kendaraan dan konsultasi rute, atau bagikan pengalaman perjalanan Anda melalui ulasan Google.
             </motion.p>
 
             <motion.div
@@ -87,8 +87,15 @@ export function CTA() {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <Phone className="w-6 h-6 text-accent-warm shrink-0" />
-                <p className="text-primary/60">+62 812-3456-7890</p>
+                <a
+                  href="https://wa.me/6281219996055"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 group/phone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 rounded-sm"
+                >
+                  <Phone className="w-6 h-6 text-accent-warm shrink-0 group-hover/phone:scale-105 transition-transform" />
+                  <p className="text-primary/60 group-hover/phone:text-primary transition-colors">+62 812-1999-6055</p>
+                </a>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="w-6 h-6 text-accent-warm shrink-0" />
@@ -96,21 +103,33 @@ export function CTA() {
               </div>
             </motion.div>
 
-            <motion.a
-              href="https://share.google/J1f6nKfyXROHlnksj"
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-4 pl-8 pr-3 py-3 rounded-full text-lg font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors group"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto"
             >
-              Leave a Review
-              <span className="w-10 h-10 rounded-full bg-foreground flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
-                <ArrowUpRight className="w-5 h-5" />
-              </span>
-            </motion.a>
+              <a
+                href="https://wa.me/6281219996055"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 px-5 py-2.5 rounded-full text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.96] transition-transform duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 group"
+              >
+                <WhatsappLogo className="w-4 h-4 text-emerald-600 shrink-0" weight="fill" />
+                <span>Hubungi via WhatsApp</span>
+              </a>
+
+              <a
+                href="https://share.google/J1f6nKfyXROHlnksj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 px-5 py-2.5 rounded-full text-sm font-medium border border-white/20 bg-white/5 text-primary hover:bg-white/10 active:scale-[0.96] transition-transform duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 group"
+              >
+                <span>Tinggalkan Ulasan</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-primary/60 group-hover:text-primary transition-colors" />
+              </a>
+            </motion.div>
           </div>
 
           {/* Right Map */}

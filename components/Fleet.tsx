@@ -71,7 +71,7 @@ const fleet = [
 
 function CarCard({ car }: { car: typeof fleet[0] }) {
   const [currentImage, setCurrentImage] = useState(0);
-  const whatsappNumber = "628123456789";
+  const whatsappNumber = "6281219996055";
   const message = encodeURIComponent(`Halo, saya tertarik untuk menyewa ${car.name}. Bisa info lebih lanjut?`);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
 
