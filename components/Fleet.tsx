@@ -5,6 +5,8 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import { UsersFour, CheckCircle, WhatsappLogo, CaretLeft, CaretRight } from '@phosphor-icons/react';
 
+import { useLanguage } from '@/context/LanguageContext';
+
 const fleet = [
   {
     id: "alphard-executive-2025",
@@ -68,12 +70,18 @@ const fleet = [
   }
 ];
 
-
 function CarCard({ car }: { car: typeof fleet[0] }) {
   const [currentImage, setCurrentImage] = useState(0);
+  const { t } = useLanguage();
   const whatsappNumber = "6281219996055";
-  const message = encodeURIComponent(`Halo, saya tertarik untuk menyewa ${car.name}. Bisa info lebih lanjut?`);
+  const message = encodeURIComponent(t.fleet.waTemplate(car.name));
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+  const carData = t.fleet.cars[car.id as keyof typeof t.fleet.cars] || {
+    category: car.category,
+    luggage: car.luggage,
+    amenities: car.amenities
+  };
 
   const nextImage = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -100,8 +108,8 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
         />
         
         <div className="absolute inset-y-0 left-2 right-2 flex items-center justify-between opacity-0 group-hover/image:opacity-100 transition-opacity">
-           <button onClick={prevImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Previous image"><CaretLeft weight="bold" className="w-4 h-4"/></button>
-           <button onClick={nextImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Next image"><CaretRight weight="bold" className="w-4 h-4"/></button>
+           <button onClick={prevImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label={t.fleet.prevImage}><CaretLeft weight="bold" className="w-4 h-4"/></button>
+           <button onClick={nextImage} className="p-1.5 bg-black/60 text-white hover:bg-black transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label={t.fleet.nextImage}><CaretRight weight="bold" className="w-4 h-4"/></button>
         </div>
         
         <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-10">
@@ -115,11 +123,11 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
         <h3 className="text-xl sm:text-2xl font-display font-medium text-white tracking-tighter leading-none">{car.name}</h3>
         
         <p className="mt-2 text-sm text-zinc-400">
-          {car.category} · {car.seats} Seats
+          {carData.category} · {car.seats} {t.fleet.seatsUnit}
         </p>
 
         <div className="mt-4 flex flex-col gap-3">
-          {car.amenities.map((amenity, idx) => (
+          {carData.amenities.map((amenity, idx) => (
             <div key={idx} className="flex items-start gap-2 text-sm text-zinc-400">
               <CheckCircle className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" aria-hidden="true" />
               <span>{amenity}</span>
@@ -134,10 +142,10 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
           target="_blank"
           rel="noopener noreferrer"
           className="w-full py-3 px-4 bg-white text-black text-sm font-semibold hover:bg-zinc-200 active:scale-[0.97] transition-colors transition-transform duration-150 flex items-center justify-center gap-2 group/btn rounded-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-          aria-label={`Reserve ${car.name} via WhatsApp`}
+          aria-label={`${t.fleet.reserveBtn} - ${car.name}`}
         >
           <WhatsappLogo className="w-5 h-5 group-hover/btn:scale-110 transition-transform" weight="fill" />
-          Reserve via WhatsApp
+          {t.fleet.reserveBtn}
         </a>
       </div>
     </div>
@@ -147,6 +155,7 @@ function CarCard({ car }: { car: typeof fleet[0] }) {
 export function Fleet() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [animationKey, setAnimationKey] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleReplay = () => {
@@ -194,10 +203,10 @@ export function Fleet() {
         <div>
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-6 bg-primary/40"></div>
-            <span className="text-sm font-medium uppercase tracking-widest text-primary/80">Our Collection</span>
+            <span className="text-sm font-medium uppercase tracking-widest text-primary/80">{t.fleet.eyebrow}</span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
-            The exclusive{' '}
+            {t.fleet.titlePrefix}
             <span className="relative inline-block">
               <motion.span
                 key={animationKey}
@@ -207,7 +216,7 @@ export function Fleet() {
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
               />
-              <span className="relative z-10">fleet</span>
+              <span className="relative z-10">{t.fleet.titleHighlight}</span>
             </span>
           </h2>
         </div>
@@ -219,10 +228,10 @@ export function Fleet() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <button onClick={scrollLeft} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Scroll left">
+          <button onClick={scrollLeft} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label={t.fleet.scrollLeft}>
             <CaretLeft className="w-5 h-5" weight="bold" />
           </button>
-          <button onClick={scrollRight} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label="Scroll right">
+          <button onClick={scrollRight} className="w-12 h-12 flex items-center justify-center border border-zinc-800 hover:bg-zinc-900 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400" aria-label={t.fleet.scrollRight}>
             <CaretRight className="w-5 h-5" weight="bold" />
           </button>
         </motion.div>

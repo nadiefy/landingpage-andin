@@ -3,10 +3,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function About() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [animationKey, setAnimationKey] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleReplay = () => {
@@ -54,11 +56,11 @@ export function About() {
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-6 bg-primary/40"></div>
-            <span className="text-sm font-medium uppercase tracking-widest text-primary/80">Tentang Kami</span>
+            <span className="text-sm font-medium uppercase tracking-widest text-primary/80">{t.about.eyebrow}</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-tight mb-16 max-w-4xl text-white">
-            Kenyamanan berkendara untuk{' '}
+            {t.about.titlePrefix}
             <span className="relative inline-block">
               <motion.span
                 key={animationKey}
@@ -68,7 +70,7 @@ export function About() {
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
               />
-              <span className="relative z-10">setiap agenda Anda</span>
+              <span className="relative z-10">{t.about.titleHighlight}</span>
             </span>
           </h2>
         </motion.div>
@@ -106,10 +108,10 @@ export function About() {
             className="space-y-8 text-base md:text-lg text-primary/70 leading-relaxed max-w-prose"
           >
             <p>
-              Kami memastikan proses sewa kendaraan berjalan mudah dan tepat waktu. Seluruh armada kami rawat secara berkala demi menjaga kenyamanan, performa, serta kebersihan kabin.
+              {t.about.p1}
             </p>
             <p>
-              Mulai dari pemesanan via WhatsApp hingga pengantaran unit ke lokasi Anda, tim kami menangani setiap detail dengan cermat untuk kelancaran perjalanan Anda.
+              {t.about.p2}
             </p>
           </motion.div>
         </div>

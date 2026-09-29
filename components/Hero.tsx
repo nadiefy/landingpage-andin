@@ -2,12 +2,14 @@
 
 import { motion, useScroll, useTransform, useReducedMotion } from 'motion/react';
 import { ArrowRight } from '@phosphor-icons/react';
-import Link from 'next/link';
 import { useRef } from 'react';
+import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const { t } = useLanguage();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -54,14 +56,14 @@ export function Hero() {
           className="max-w-4xl"
         >
           <h1 className="text-5xl md:text-6xl lg:text-[78px] font-display font-medium leading-[1.1] tracking-tighter text-balance text-primary mb-10">
-            Premium Fleet. Professional Drivers.
+            {t.hero.headline}
           </h1>
 
           <Link
             href="#fleet"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-primary/20 hover:border-primary/50 text-primary font-medium transition-transform transition-colors duration-300 active:scale-[0.98] group"
           >
-            Explore Our Fleet
+            {t.hero.cta}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" weight="regular" aria-hidden="true" />
           </Link>
         </motion.div>

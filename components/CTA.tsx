@@ -4,9 +4,11 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowUpRight, MapPin, Phone, Mail } from 'lucide-react';
 import { WhatsappLogo } from '@phosphor-icons/react';
 import { useRef } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function CTA() {
   const ref = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
@@ -49,7 +51,7 @@ export function CTA() {
               className="flex items-center gap-4 mb-6"
             >
               <div className="h-px w-6 bg-primary/40"></div>
-              <span className="text-sm font-medium uppercase tracking-widest text-primary/80">Hubungi Kami</span>
+              <span className="text-sm font-medium uppercase tracking-widest text-primary/80">{t.cta.eyebrow}</span>
             </motion.div>
 
             <motion.h2
@@ -59,7 +61,7 @@ export function CTA() {
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-tight text-white mb-6"
             >
-              Siap melayani perjalanan Anda
+              {t.cta.heading}
             </motion.h2>
 
             <motion.p
@@ -69,7 +71,7 @@ export function CTA() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="text-base md:text-lg text-primary/70 leading-relaxed mb-10 max-w-md"
             >
-              Hubungi kami untuk reservasi kendaraan dan konsultasi rute, atau bagikan pengalaman perjalanan Anda melalui ulasan Google.
+              {t.cta.desc}
             </motion.p>
 
             <motion.div
@@ -82,8 +84,8 @@ export function CTA() {
               <div className="flex items-start gap-4">
                 <MapPin className="w-6 h-6 text-accent-warm shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-medium text-primary">Headquarters</p>
-                  <p className="text-primary/60">Surabaya, East Java<br />Indonesia</p>
+                  <p className="font-medium text-primary">{t.cta.headquarters}</p>
+                  <p className="text-primary/60 whitespace-pre-line">{t.cta.addressLocation}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -117,7 +119,7 @@ export function CTA() {
                 className="inline-flex items-center justify-center gap-3 px-5 py-2.5 rounded-full text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.96] transition-transform duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 group"
               >
                 <WhatsappLogo className="w-4 h-4 text-emerald-600 shrink-0" weight="fill" />
-                <span>Hubungi via WhatsApp</span>
+                <span>{t.cta.waButton}</span>
               </a>
 
               <a
@@ -126,7 +128,7 @@ export function CTA() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 px-5 py-2.5 rounded-full text-sm font-medium border border-white/20 bg-white/5 text-primary hover:bg-white/10 active:scale-[0.96] transition-transform duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 group"
               >
-                <span>Tinggalkan Ulasan</span>
+                <span>{t.cta.reviewButton}</span>
                 <ArrowUpRight className="w-3.5 h-3.5 text-primary/60 group-hover:text-primary transition-colors" />
               </a>
             </motion.div>

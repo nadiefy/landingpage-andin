@@ -4,6 +4,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 import Image from 'next/image';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface FooterLink {
   title: string;
@@ -16,36 +17,38 @@ interface FooterSection {
   links: FooterLink[];
 }
 
-const footerLinks: FooterSection[] = [
-  {
-    label: 'Company',
-    links: [
-      { title: 'Our Fleet', href: '#fleet' },
-      { title: 'Services', href: '#services' },
-      { title: 'About Us', href: '#about' },
-      { title: 'Contact', href: '#contact' },
-    ],
-  },
-  {
-    label: 'Legal',
-    links: [
-      { title: 'Terms & Conditions', href: '/terms' },
-      { title: 'Privacy Policy', href: '/privacy' },
-      { title: 'Cookie Policy', href: '/cookies' },
-    ],
-  },
-  {
-    label: 'Social Links',
-    links: [
-      { title: 'Facebook', href: '#', icon: Facebook },
-      { title: 'Instagram', href: '#', icon: Instagram },
-      { title: 'Youtube', href: '#', icon: Youtube },
-      { title: 'LinkedIn', href: '#', icon: Linkedin },
-    ],
-  },
-];
-
 export function Footer() {
+  const { t } = useLanguage();
+
+  const footerLinks: FooterSection[] = [
+    {
+      label: t.footer.company,
+      links: [
+        { title: t.footer.fleet, href: '#fleet' },
+        { title: t.footer.services, href: '#services' },
+        { title: t.footer.about, href: '#about' },
+        { title: t.footer.contact, href: '#contact' },
+      ],
+    },
+    {
+      label: t.footer.legal,
+      links: [
+        { title: t.footer.terms, href: '/terms' },
+        { title: t.footer.privacy, href: '/privacy' },
+        { title: t.footer.cookies, href: '/cookies' },
+      ],
+    },
+    {
+      label: t.footer.social,
+      links: [
+        { title: 'Facebook', href: '#', icon: Facebook },
+        { title: 'Instagram', href: '#', icon: Instagram },
+        { title: 'Youtube', href: '#', icon: Youtube },
+        { title: 'LinkedIn', href: '#', icon: Linkedin },
+      ],
+    },
+  ];
+
   return (
     <footer className="md:rounded-t-6xl relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center rounded-t-4xl border-t border-primary/10 bg-[radial-gradient(35%_128px_at_50%_0%,theme(backgroundColor.white/8%),transparent)] px-6 py-12 lg:py-16">
       <div className="bg-primary/20 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur" />
@@ -55,14 +58,14 @@ export function Footer() {
           <div className="flex items-center gap-2 overflow-visible">
             <Image
               src="/assets/pic/andinlogo-removebg.png"
-              alt="Andin Transport Logo"
+              alt="Logo Andin Transport"
               width={400}
               height={120}
               className="h-12 md:h-16 w-auto object-contain scale-[1.2] origin-left -ml-2"
             />
           </div>
           <p suppressHydrationWarning className="text-primary/60 mt-8 text-sm md:mt-0">
-            © {new Date().getFullYear()} Andin Transport. All rights reserved.
+            © {new Date().getFullYear()} Andin Transport. {t.footer.rights}
           </p>
         </AnimatedContainer>
 

@@ -3,30 +3,19 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
+import { useLanguage } from '@/context/LanguageContext';
 
-const SERVICES_DATA = [
-  {
-    title: "Jadwal Fleksibel",
-    desc: "Sewa harian, mingguan, atau bulanan sesuai rencana perjalanan Anda. Atur mobilitas eksekutif, kebutuhan produksi, hingga wisata premium dengan kendali penuh.",
-    image: "/assets/pic/services-section/scheduling.jpg"
-  },
-  {
-    title: "Layanan Pengemudi",
-    desc: "Pengemudi berseragam dan berpengalaman siap melayani rute kota hingga antar-jemput bandara. Nikmati perjalanan tepat waktu dengan kenyamanan serta privasi terjaga.",
-    image: "/assets/pic/services-section/chauffeur.jpg"
-  },
-  {
-    title: "Dukungan Penuh",
-    desc: "Tim operasional kami siaga 24 jam untuk bantuan darurat jalan raya, penyesuaian rute perjalanan, hingga penggantian unit kendaraan secara cepat.",
-    image: "/assets/pic/services-section/support.jpg"
-  }
+const SERVICE_IMAGES = [
+  "/assets/pic/services-section/scheduling.jpg",
+  "/assets/pic/services-section/chauffeur.jpg",
+  "/assets/pic/services-section/support.jpg"
 ];
 
-function ImageCard({ service }: { service: typeof SERVICES_DATA[0] }) {
+function ImageCard({ service, image }: { service: { title: string; desc: string }; image: string }) {
   return (
     <div className="relative overflow-hidden rounded-2xl aspect-[3/4] group">
       <Image
-        src={service.image}
+        src={image}
         alt={service.title}
         fill
         unoptimized={false}
@@ -48,6 +37,7 @@ function ImageCard({ service }: { service: typeof SERVICES_DATA[0] }) {
 
 export function Services() {
   const [animationKey, setAnimationKey] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleReplay = () => {
@@ -85,25 +75,29 @@ export function Services() {
           <div className="flex items-center gap-4 mb-6">
             <div className="h-px w-6 bg-white/40"></div>
             <span className="text-sm font-medium uppercase tracking-widest text-zinc-400 font-sans">
-              Layanan Unggulan
+              {t.services.eyebrow}
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-5xl font-display font-medium tracking-tighter leading-none text-white">
-            Layanan untuk <span className="relative inline-block"><motion.span
+            {t.services.titlePrefix}
+            <span className="relative inline-block">
+              <motion.span
                 key={animationKey}
                 className="absolute inset-x-0 -top-[0.15em] -bottom-[0.15em] bg-[#ec3237] origin-left"
                 initial={{ scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: false, amount: 0.5 }}
                 transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-              /><span className="relative z-10">setiap perjalanan</span></span>
+              />
+              <span className="relative z-10">{t.services.titleHighlight}</span>
+            </span>
           </h2>
         </div>
 
         {/* Layout Grid: 3-column Image Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {SERVICES_DATA.map((service) => (
-            <ImageCard key={service.title} service={service} />
+          {t.services.items.map((service, index) => (
+            <ImageCard key={service.title} service={service} image={SERVICE_IMAGES[index]} />
           ))}
         </div>
 
