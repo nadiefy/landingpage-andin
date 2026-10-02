@@ -4,49 +4,50 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 export type Language = 'id' | 'en';
 
-export function IndonesiaFlag({ className = 'w-4 h-3' }: { className?: string }) {
+export function IndonesiaFlag({ className = 'w-6 h-6' }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 16 12"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`rounded-full shrink-0 ring-1 ring-black/15 overflow-hidden ${className}`}
       aria-hidden="true"
     >
-      <rect width="16" height="12" rx="2" fill="#FFFFFF" />
-      <path d="M0 2C0 0.895431 0.895431 0 2 0H14C15.1046 0 16 0.895431 16 2V6H0V2Z" fill="#E70011" />
-      <rect x="0.25" y="0.25" width="15.5" height="11.5" rx="1.75" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+      <rect y="0" width="24" height="12" fill="#E31E24" />
+      <rect y="12" width="24" height="12" fill="#FFFFFF" />
     </svg>
   );
 }
 
-export function USAFlag({ className = 'w-4 h-3' }: { className?: string }) {
+export function USAFlag({ className = 'w-6 h-6' }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 16 12"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
+      className={`rounded-full shrink-0 ring-1 ring-black/15 overflow-hidden ${className}`}
       aria-hidden="true"
     >
-      <rect width="16" height="12" rx="2" fill="#FFFFFF" />
+      <rect width="24" height="24" fill="#FFFFFF" />
       {/* 7 Red Stripes */}
-      <rect y="0" width="16" height="1" fill="#B22234" />
-      <rect y="1.846" width="16" height="1" fill="#B22234" />
-      <rect y="3.692" width="16" height="1" fill="#B22234" />
-      <rect y="5.538" width="16" height="1" fill="#B22234" />
-      <rect y="7.384" width="16" height="1" fill="#B22234" />
-      <rect y="9.23" width="16" height="1" fill="#B22234" />
-      <rect y="11" width="16" height="1" fill="#B22234" />
+      <rect y="0" width="24" height="2.2" fill="#B22234" />
+      <rect y="4.1" width="24" height="2" fill="#B22234" />
+      <rect y="7.9" width="24" height="2" fill="#B22234" />
+      <rect y="11.7" width="24" height="2" fill="#B22234" />
+      <rect y="15.5" width="24" height="2" fill="#B22234" />
+      <rect y="19.3" width="24" height="2" fill="#B22234" />
+      <rect y="22.5" width="24" height="1.5" fill="#B22234" />
       {/* Blue Canton */}
-      <path d="M0 2C0 0.895431 0.895431 0 2 0H7V6.5H0V2Z" fill="#3C3B6E" />
-      {/* Simplified Stars Representation for high-density micro icon */}
-      <circle cx="2" cy="1.8" r="0.6" fill="#FFFFFF" />
-      <circle cx="5" cy="1.8" r="0.6" fill="#FFFFFF" />
-      <circle cx="3.5" cy="3.25" r="0.6" fill="#FFFFFF" />
-      <circle cx="2" cy="4.7" r="0.6" fill="#FFFFFF" />
-      <circle cx="5" cy="4.7" r="0.6" fill="#FFFFFF" />
-      <rect x="0.25" y="0.25" width="15.5" height="11.5" rx="1.75" stroke="rgba(255,255,255,0.2)" strokeWidth="0.5" />
+      <rect width="11" height="13" fill="#3C3B6E" />
+      {/* Stars */}
+      <circle cx="2.5" cy="3" r="0.8" fill="#FFFFFF" />
+      <circle cx="6" cy="3" r="0.8" fill="#FFFFFF" />
+      <circle cx="9.5" cy="3" r="0.8" fill="#FFFFFF" />
+      <circle cx="4.25" cy="6.5" r="0.8" fill="#FFFFFF" />
+      <circle cx="7.75" cy="6.5" r="0.8" fill="#FFFFFF" />
+      <circle cx="2.5" cy="10" r="0.8" fill="#FFFFFF" />
+      <circle cx="6" cy="10" r="0.8" fill="#FFFFFF" />
+      <circle cx="9.5" cy="10" r="0.8" fill="#FFFFFF" />
     </svg>
   );
 }

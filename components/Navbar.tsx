@@ -20,6 +20,16 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: t.nav.services, href: '#services' },
     { name: t.nav.fleet, href: '#fleet' },
@@ -37,9 +47,9 @@ export function Navbar() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between relative">
             {/* Logo */}
-            <Link href="/" className="flex items-center z-50 overflow-visible" aria-label="Andin Transport Home">
+            <Link href="/" className="flex items-center z-50 overflow-visible shrink-0" aria-label="Andin Transport Home">
               <Image
                 src="/assets/pic/andinlogo-removebg.png"
                 alt="Logo Andin Transport"
@@ -50,8 +60,8 @@ export function Navbar() {
               />
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-1">
+            {/* Desktop Nav - Center-locked to guarantee zero layout shift */}
+            <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -64,53 +74,52 @@ export function Navbar() {
               ))}
             </nav>
 
-            {/* Right Controls: Language Toggle & CTA & Mobile Toggle */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              {/* Glassmorphic Language Toggle Switch (Desktop) */}
+            {/* Right Controls: Seamless Language Switch & Fixed-Width CTA & Mobile Toggle */}
+            <div className="flex items-center gap-3 shrink-0">
+              {/* Seamless Language Toggle (Integrated directly into Navbar Glassmorphism) */}
               <div
                 role="group"
                 aria-label={t.nav.langAria}
-                className="hidden sm:flex items-center gap-0.5 bg-white/5 border border-white/10 backdrop-blur-md rounded-full p-1 text-xs shadow-inner shadow-black/20"
+                className="hidden sm:flex items-center gap-1 shrink-0"
               >
                 <button
                   type="button"
                   onClick={() => setLanguage('id')}
                   aria-pressed={language === 'id'}
                   aria-label={t.nav.switchToId}
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors transition-transform duration-150 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-transform transition-opacity transition-colors duration-150 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 shrink-0 ${
                     language === 'id'
-                      ? 'bg-white text-black font-semibold shadow-sm'
-                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                      ? 'bg-white/20 ring-1 ring-white/30 shadow-sm'
+                      : 'opacity-60 hover:opacity-100 hover:bg-white/10'
                   }`}
                 >
-                  <IndonesiaFlag className="w-4 h-3 rounded-[2px] ring-1 ring-black/10 shrink-0" />
-                  <span>ID</span>
+                  <IndonesiaFlag className="w-6 h-6" />
                 </button>
                 <button
                   type="button"
                   onClick={() => setLanguage('en')}
                   aria-pressed={language === 'en'}
                   aria-label={t.nav.switchToEn}
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors transition-transform duration-150 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 ${
+                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-transform transition-opacity transition-colors duration-150 active:scale-[0.96] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 shrink-0 ${
                     language === 'en'
-                      ? 'bg-white text-black font-semibold shadow-sm'
-                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                      ? 'bg-white/20 ring-1 ring-white/30 shadow-sm'
+                      : 'opacity-60 hover:opacity-100 hover:bg-white/10'
                   }`}
                 >
-                  <USAFlag className="w-4 h-3 rounded-[2px] ring-1 ring-black/10 shrink-0" />
-                  <span>EN</span>
+                  <USAFlag className="w-6 h-6" />
                 </button>
               </div>
 
-              {/* Primary CTA */}
+              {/* Primary CTA: Centered content with fixed width (w-[164px]) */}
               <Link
                 href="#contact"
-                className={`hidden md:flex items-center gap-2 pl-5 pr-2 py-2 rounded-full text-sm font-medium transition-colors transition-transform duration-200 active:scale-[0.96] ${scrolled ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-primary text-primary-foreground hover:bg-primary/90'
-                  }`}
+                className={`hidden md:flex items-center justify-center gap-2.5 w-[164px] py-2 rounded-full text-sm font-medium transition-colors transition-transform duration-200 active:scale-[0.96] shrink-0 ${
+                  scrolled ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-primary text-primary-foreground hover:bg-primary/90'
+                }`}
               >
-                {t.nav.bookNow}
-                <span className="w-6 h-6 rounded-full bg-foreground flex items-center justify-center text-primary">
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                <span>{t.nav.bookNow}</span>
+                <span className="w-5 h-5 rounded-full bg-foreground flex items-center justify-center text-primary shrink-0">
+                  <ArrowUpRight className="w-3 h-3" />
                 </span>
               </Link>
 
@@ -129,7 +138,7 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -137,11 +146,11 @@ export function Navbar() {
             exit={{ opacity: 0, y: -20 }}
             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center p-6"
           >
-            {/* Mobile Language Switcher */}
+            {/* Mobile Language Switcher (Clean & seamless) */}
             <div
               role="group"
               aria-label={t.nav.langAria}
-              className="flex items-center gap-1 bg-white/10 border border-white/15 backdrop-blur-md rounded-full p-1 text-xs mb-8 shadow-inner shadow-black/30"
+              className="flex items-center gap-1 bg-white/[0.08] rounded-full p-1 text-xs mb-8"
             >
               <button
                 type="button"
@@ -154,7 +163,7 @@ export function Navbar() {
                     : 'text-white/70 hover:text-white'
                 }`}
               >
-                <IndonesiaFlag className="w-4 h-3 rounded-[2px] ring-1 ring-black/10 shrink-0" />
+                <IndonesiaFlag className="w-5 h-5" />
                 <span>Indonesia</span>
               </button>
               <button
@@ -168,7 +177,7 @@ export function Navbar() {
                     : 'text-white/70 hover:text-white'
                 }`}
               >
-                <USAFlag className="w-4 h-3 rounded-[2px] ring-1 ring-black/10 shrink-0" />
+                <USAFlag className="w-5 h-5" />
                 <span>English</span>
               </button>
             </div>
