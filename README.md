@@ -36,8 +36,6 @@
 | UI | React 19, Tailwind CSS 4 |
 | Animation | Framer Motion (`motion` v12) |
 | Icons | Phosphor Icons, Lucide |
-| AI | Google Gemini (via `@google/genai`) |
-| Deployment | Firebase Hosting |
 
 ## Getting Started
 
@@ -51,10 +49,7 @@ cd landingpage-andin
 # 2. Install dependencies
 npm install
 
-# 3. Set your Gemini API key
-cp .env.example .env.local   # then edit GEMINI_API_KEY
-
-# 4. Start dev server
+# 3. Start dev server
 npm run dev
 ```
 
